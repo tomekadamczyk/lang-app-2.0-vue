@@ -1,16 +1,19 @@
 <template>
   <header class="header">
+    <Hamburger />
     <NavigationItems />
   </header>
 </template>
 
 <script>
+import Hamburger from '../UI/Hamburger.vue';
 import NavigationItems from './NavigationItems/NavigationItems.vue';
 
 export default {
   name: 'VHeader',
   components: {
     NavigationItems,
+    Hamburger,
   },
 };
 </script>

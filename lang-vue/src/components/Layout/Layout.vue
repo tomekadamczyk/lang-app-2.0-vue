@@ -1,10 +1,12 @@
 <template>
     <main class="layout">
+<Hamburger/>
         <slot/>
     </main>
 </template>
 
 <script>
+
 export default {
     name: 'Layout',
 }
