@@ -22,6 +22,7 @@ export default {
             links: [
                 {id: 0, linkname: 'Dashboard', linkurl: '/'},
                 {id: 1, linkname: 'Flashcards', linkurl: '/flashcards'},
+                {id: 1, linkname: 'Hangman', linkurl: '/hangman'},
             ],
         };
     },
