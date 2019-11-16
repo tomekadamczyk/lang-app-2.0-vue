@@ -1,6 +1,6 @@
 <template>
   <header class="header" v-bind:class="{active: activeHeader}">
-    <NavigationItems />
+    <NavigationItems v-bind:activeHeader="activeHeader" />
   </header>
 </template>
 

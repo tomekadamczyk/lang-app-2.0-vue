@@ -1,12 +1,14 @@
 <template>
     <li>
-        <span>{{linkCategory}}</span>
+        <span 
+            v-bind:class="{active: activeHeader}"
+            >{{linkCategory}}</span>
         <ul class="nav-items" v-if="renderByCategory">
             <NavigationItem
                 v-for="(link, index) in renderByCategory"
                 v-bind:key="index"
                 v-bind:url="link.url"
-                v-bind:name="isHeaderWide ? link.name : link.placeholder"
+                v-bind:name="activeHeader ? link.name : link.placeholder"
             >
             </NavigationItem>
         </ul>
@@ -27,17 +29,19 @@ export default {
         category: {
             type: String,
         },
+        activeHeader: {
+            type: Boolean,
+        },
     },
     data() {
         return {
-            isHeaderWide: false,
             linkCategory: this.category,
             links: [
                 {id: 0, name: 'Dashboard', placeholder: 'O', url: '/', category: general},
                 {id: 1, name: 'Flashcards', placeholder: 'O', url: '/flashcards', category: excercises},
-                {id: 2, name: 'Hangman', placeholder: 'O',kurl: '/hangman', category: excercises},
+                {id: 2, name: 'Hangman', placeholder: 'O', url: '/hangman', category: excercises},
                 {id: 3, name: 'test1', placeholder: 'O', url: '/hangman', category: test},
-                {id: 4, name: 'test2', placeholder: 'O',url: '/hangman', category: test},
+                {id: 4, name: 'test2', placeholder: 'O', url: '/hangman', category: test},
                 {id: 5, name: 'fav', placeholder: 'O', url: '/hangman', category: favorites},
                 {id: 6, name: 'fav2', placeholder: 'O', url: '/hangman', category: favorites},
             ],
@@ -73,10 +77,11 @@ export default {
         text-transform: capitalize;
 
         @include media-screen(tablet-up) {
-            opacity: 0;
+            transform: translateX(-200%);
+            transition: transform .6s;
 
             &.active {
-                opacity: 1;
+                transform: translateX(0);
             }
             margin: 0 0 5px 20px;
         }

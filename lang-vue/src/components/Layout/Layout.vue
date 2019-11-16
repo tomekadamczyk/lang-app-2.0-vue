@@ -28,7 +28,7 @@ export default {
     },
     data() {
         return {
-            isLayoutActive: true,
+            isLayoutActive: false,
         };
     },
     methods: {

@@ -1,5 +1,5 @@
 <template>
-    <NavigationCategories />
+    <NavigationCategories v-bind:activeHeader="activeHeader" />
 </template>
 
 <script>
@@ -9,6 +9,11 @@ export default {
     name: 'NavigationItems',
     components: {
         NavigationCategories,
+    },
+    props: {
+        activeHeader: {
+            type: Boolean,
+        },
     },
 };
 </script>

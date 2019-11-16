@@ -4,6 +4,7 @@
             v-for="(category, index) in categories"
             v-bind:key="index" 
             v-bind:category="category"
+            v-bind:activeHeader="activeHeader"
             class="nav-categories__category"
         >
         </NavigationCategory>
@@ -19,6 +20,11 @@ export default {
     name: 'NavigationCategories',
     components: {
         NavigationCategory,
+    },
+    props: {
+        activeHeader: {
+            type: Boolean,
+        },
     },
     data() {
         return {
