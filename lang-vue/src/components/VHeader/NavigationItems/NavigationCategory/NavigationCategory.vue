@@ -69,6 +69,7 @@ export default {
         font-size: 13px;
         position: relative;
         margin-bottom: 5px;
+        text-transform: capitalize;
 
         @include media-screen(tablet-up) {
             margin: 0 0 5px 20px;
