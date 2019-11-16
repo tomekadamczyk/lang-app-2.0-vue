@@ -1,16 +1,20 @@
 <template>
   <div id="app">
     <VHeader />
-    <router-view/>
+    <Layout>
+      <router-view/>
+    </Layout>
   </div>
 </template>
 
 <script>
 import VHeader from './components/VHeader/VHeader.vue';
+import Layout from './components/Layout/Layout.vue';
 
 export default {
   components: {
     VHeader,
+    Layout,
   },
 };
 </script>
@@ -30,6 +34,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
 }
 #nav {
   padding: 30px;
