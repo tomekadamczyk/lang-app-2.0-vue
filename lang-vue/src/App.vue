@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <VHeader />
     <Layout>
       <router-view/>
     </Layout>
@@ -8,12 +7,10 @@
 </template>
 
 <script>
-import VHeader from './components/VHeader/VHeader.vue';
 import Layout from './components/Layout/Layout.vue';
 
 export default {
   components: {
-    VHeader,
     Layout,
   },
 };

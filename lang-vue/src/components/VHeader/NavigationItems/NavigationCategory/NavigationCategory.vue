@@ -5,8 +5,8 @@
             <NavigationItem
                 v-for="(link, index) in renderByCategory"
                 v-bind:key="index"
-                v-bind:url="link.linkurl"
-                v-bind:name="link.linkname"
+                v-bind:url="link.url"
+                v-bind:name="isHeaderWide ? link.name : link.placeholder"
             >
             </NavigationItem>
         </ul>
@@ -30,15 +30,16 @@ export default {
     },
     data() {
         return {
+            isHeaderWide: false,
             linkCategory: this.category,
             links: [
-                {id: 0, linkname: 'Dashboard', linkurl: '/', category: general},
-                {id: 1, linkname: 'Flashcards', linkurl: '/flashcards', category: excercises},
-                {id: 2, linkname: 'Hangman', linkurl: '/hangman', category: excercises},
-                {id: 3, linkname: 'test1', linkurl: '/hangman', category: test},
-                {id: 4, linkname: 'test2', linkurl: '/hangman', category: test},
-                {id: 5, linkname: 'fav', linkurl: '/hangman', category: favorites},
-                {id: 6, linkname: 'fav2', linkurl: '/hangman', category: favorites},
+                {id: 0, name: 'Dashboard', placeholder: 'O', url: '/', category: general},
+                {id: 1, name: 'Flashcards', placeholder: 'O', url: '/flashcards', category: excercises},
+                {id: 2, name: 'Hangman', placeholder: 'O',kurl: '/hangman', category: excercises},
+                {id: 3, name: 'test1', placeholder: 'O', url: '/hangman', category: test},
+                {id: 4, name: 'test2', placeholder: 'O',url: '/hangman', category: test},
+                {id: 5, name: 'fav', placeholder: 'O', url: '/hangman', category: favorites},
+                {id: 6, name: 'fav2', placeholder: 'O', url: '/hangman', category: favorites},
             ],
         };
     },
@@ -72,6 +73,11 @@ export default {
         text-transform: capitalize;
 
         @include media-screen(tablet-up) {
+            opacity: 0;
+
+            &.active {
+                opacity: 1;
+            }
             margin: 0 0 5px 20px;
         }
     }
