@@ -11,6 +11,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/style.scss";
     .layout {
         width: calc(100% - 250px);
     height: 100vh;

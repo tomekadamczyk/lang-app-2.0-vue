@@ -14,6 +14,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../assets/scss/style.scss";
+
     .nav-items {
         list-style-type: none;
         padding: 0;

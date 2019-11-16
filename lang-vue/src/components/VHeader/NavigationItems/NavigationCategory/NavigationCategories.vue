@@ -29,10 +29,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../../assets/scss/style.scss";
+
     .nav-categories {
         list-style-type: none;
         padding: 0;
-        background: #349268;
+        background: $primary;
         margin: 0;
         height: 100%;
 

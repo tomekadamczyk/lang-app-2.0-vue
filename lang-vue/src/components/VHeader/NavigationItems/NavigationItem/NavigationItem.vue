@@ -25,9 +25,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../../assets/scss/style.scss";
+
     .nav-item {
         a {
-            color: #fff;
+            color: $white;
             text-decoration: none;
             display: block;
             width: 100%;

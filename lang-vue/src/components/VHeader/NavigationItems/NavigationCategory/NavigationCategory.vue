@@ -53,12 +53,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../../assets/scss/style.scss";
+
     .nav-items {
         display: flex;
         flex-direction: column;
         list-style-type: none;
         padding: 0;
-        background: #349268;
         margin: 0;
     }
             span {
