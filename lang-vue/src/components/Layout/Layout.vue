@@ -1,6 +1,5 @@
 <template>
     <main class="layout">
-<Hamburger/>
         <slot/>
     </main>
 </template>
