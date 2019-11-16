@@ -62,8 +62,12 @@ export default {
         padding: 0;
         margin: 0;
     }
-            span {
-                margin-left: 20px;
-                display: block;
-            }
+    span {
+        margin: 0 0 2px 20px;
+        display: block;
+        color: $gray-light-1;
+        font-weight: bold;
+        font-size: 13px;
+        position: relative;
+    }
 </style>

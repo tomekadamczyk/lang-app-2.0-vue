@@ -33,12 +33,15 @@ export default {
 
     .nav-categories {
         list-style-type: none;
-        padding: 0;
+        padding: 100px 0;
         background: $primary;
         margin: 0;
         height: 100%;
 
         &__category {
+            padding-bottom: 7px;
+            margin-bottom: 13px;
+            border-bottom: 1px solid $gray-light-1;
         }
     }
 </style>

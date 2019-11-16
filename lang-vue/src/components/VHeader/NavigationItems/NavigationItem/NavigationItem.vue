@@ -33,7 +33,12 @@ export default {
             text-decoration: none;
             display: block;
             width: 100%;
-            padding: 5px 38px;
+            padding: 8px 38px;
+            line-height: 1;
+
+            &:hover {
+                background: lighten($primary, 15%);
+            }
         }
     }
 </style>
