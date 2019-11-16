@@ -20,5 +20,6 @@ export default {
   .header {
     width: 250px;
     height: 100vh;
+    text-align: left;
   }
 </style>

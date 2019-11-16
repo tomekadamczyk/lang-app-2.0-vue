@@ -31,7 +31,7 @@ export default {
             text-decoration: none;
             display: block;
             width: 100%;
-            padding: 5px 8px;
+            padding: 5px 38px;
         }
     }
 </style>
