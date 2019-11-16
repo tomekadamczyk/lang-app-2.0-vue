@@ -20,6 +20,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "assets/scss/style.scss";
 *, *::after, *::before {
   box-sizing: border-box;
 }
@@ -35,6 +36,11 @@ body {
   text-align: center;
   color: #2c3e50;
   display: flex;
+  flex-direction: column;
+  
+    @include media-screen(tablet-up) {
+      flex-direction: row;
+    }
 }
 #nav {
   padding: 30px;

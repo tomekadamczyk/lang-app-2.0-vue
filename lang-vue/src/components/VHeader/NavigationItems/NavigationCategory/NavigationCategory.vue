@@ -63,11 +63,15 @@ export default {
         margin: 0;
     }
     span {
-        margin: 0 0 2px 20px;
         display: block;
         color: $gray-light-1;
         font-weight: bold;
         font-size: 13px;
         position: relative;
+        margin-bottom: 5px;
+
+        @include media-screen(tablet-up) {
+            margin: 0 0 5px 20px;
+        }
     }
 </style>

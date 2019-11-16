@@ -33,15 +33,21 @@ export default {
 
     .nav-categories {
         list-style-type: none;
-        padding: 100px 0;
         background: $primary;
         margin: 0;
         height: 100%;
+        padding: 20px 0;
+
+        @include media-screen(tablet-up) {
+            padding: 100px 0;
+        }
 
         &__category {
-            padding-bottom: 7px;
-            margin-bottom: 13px;
-            border-bottom: 1px solid $gray-light-1;
+            &:not(:last-of-type) {
+                padding-bottom: 7px;
+                margin-bottom: 13px;
+                border-bottom: 1px solid $gray-light-1;
+            }
         }
     }
 </style>
