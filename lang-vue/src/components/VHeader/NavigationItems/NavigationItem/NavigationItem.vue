@@ -1,6 +1,8 @@
 <template>
     <li class="nav-item">
-      <router-link :to="linkUrl">{{linkName}}</router-link>
+      <router-link :to="linkUrl">
+          <span>{{linkName}}</span>
+        </router-link>
     </li>
 </template>
 
@@ -35,9 +37,26 @@ export default {
             width: 100%;
             padding: 8px 38px;
             line-height: 1;
+            position: relative;
 
             &:hover {
                 background: lighten($primary, 15%);
+            }
+
+            span {
+                display: block;
+                transform: translateY(-20px);
+                opacity: 0;
+                transition: transform .4s ease-in, opacity .4s;
+            }
+        }
+
+        &.active {
+            a {
+                span {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
         }
     }

@@ -5,10 +5,11 @@
             >{{linkCategory}}</span>
         <ul class="nav-items" v-if="renderByCategory">
             <NavigationItem
+                v-bind:class="{active: activeHeader}"
                 v-for="(link, index) in renderByCategory"
                 v-bind:key="index"
                 v-bind:url="link.url"
-                v-bind:name="activeHeader ? link.name : link.placeholder"
+                v-bind:name="link.name"
             >
             </NavigationItem>
         </ul>
