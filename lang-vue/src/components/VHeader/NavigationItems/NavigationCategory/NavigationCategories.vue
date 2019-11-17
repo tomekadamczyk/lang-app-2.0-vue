@@ -5,6 +5,7 @@
             v-bind:key="index" 
             v-bind:category="category"
             v-bind:activeHeader="activeHeader"
+            v-bind:class="{active: activeHeader}"
             class="nav-categories__category"
             v-on:closeNav="$emit('closeNav')"
         >
@@ -53,7 +54,10 @@ export default {
             &:not(:last-of-type) {
                 padding-bottom: 7px;
                 margin-bottom: 13px;
-                border-bottom: 1px solid $gray-light-1;
+
+                &.active {
+                    border-bottom: 1px solid $gray-light-1;
+                }
             }
         }
     }
