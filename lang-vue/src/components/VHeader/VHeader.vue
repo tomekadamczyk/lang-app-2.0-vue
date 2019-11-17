@@ -1,6 +1,9 @@
 <template>
   <header class="header" v-bind:class="{active: activeHeader}">
-    <NavigationItems v-bind:activeHeader="activeHeader" />
+    <NavigationItems 
+      v-bind:activeHeader="activeHeader"
+      v-on:closeNav="$emit('closeNav')"
+    />
   </header>
 </template>
 

@@ -1,5 +1,8 @@
 <template>
-    <NavigationCategories v-bind:activeHeader="activeHeader" />
+    <NavigationCategories 
+        v-bind:activeHeader="activeHeader"
+        v-on:closeNav="$emit('closeNav')"
+     />
 </template>
 
 <script>

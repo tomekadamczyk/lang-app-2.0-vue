@@ -6,6 +6,7 @@
             v-bind:category="category"
             v-bind:activeHeader="activeHeader"
             class="nav-categories__category"
+            v-on:closeNav="$emit('closeNav')"
         >
         </NavigationCategory>
     </ul>

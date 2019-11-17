@@ -6,6 +6,7 @@
         />
         <VHeader 
             v-bind:activeHeader="isLayoutActive"
+            v-on:closeNav="closeNav"
         />
         <main 
             class="layout" 
@@ -34,6 +35,10 @@ export default {
     methods: {
         toggleNavigation() {
             return this.isLayoutActive = !this.isLayoutActive;
+        },
+        closeNav() {
+            console.log('asdasd')
+            return this.isLayoutActive = false;
         }
     }
 }

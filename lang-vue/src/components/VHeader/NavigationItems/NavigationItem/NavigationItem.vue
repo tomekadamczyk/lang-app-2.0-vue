@@ -1,5 +1,8 @@
 <template>
-    <li class="nav-item">
+    <li 
+        class="nav-item"
+        v-on:click="$emit('closeNav')"
+    >
       <router-link :to="linkUrl">
           <span>{{linkName}}</span>
         </router-link>

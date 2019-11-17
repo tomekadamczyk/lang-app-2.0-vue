@@ -10,6 +10,7 @@
                 v-bind:key="index"
                 v-bind:url="link.url"
                 v-bind:name="link.name"
+                v-on:closeNav="$emit('closeNav')"
             >
             </NavigationItem>
         </ul>
@@ -36,6 +37,7 @@ export default {
     },
     data() {
         return {
+            activeNavHeader: this.activeHeader,
             linkCategory: this.category,
             links: [
                 {id: 0, name: 'Dashboard', placeholder: 'O', url: '/', category: general},
