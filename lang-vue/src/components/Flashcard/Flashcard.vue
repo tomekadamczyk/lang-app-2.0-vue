@@ -9,8 +9,13 @@
         </div>
     </div>
     <Button 
-        v-bind:buttonName="button"
+        v-bind:buttonName="btnWordValue"
         v-on:clickButton="showTranslation"
+    />
+    <Button 
+        v-bind:buttonName="btnNextValue"
+        v-on:clickButton="showTranslation"
+        class="ml-3"
     />
     </div>
 </template>
@@ -24,7 +29,8 @@ export default {
     },
     data() {
         return {
-            button: 'Check translation',
+            btnWordValue: 'Check translation',
+            btnNextValue: 'Next word',
             flashcardValue: 'Word',
             flashcardTranslation: 'Translation',
             isTranslationActive: false,
