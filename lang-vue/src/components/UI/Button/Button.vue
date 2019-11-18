@@ -1,5 +1,8 @@
 <template>
-    <button class="btn">{{value}}</button>
+    <button 
+        class="btn"
+        v-on:click="$emit('clickButton')"
+    >{{value}}</button>
 </template>
 
 <script>
