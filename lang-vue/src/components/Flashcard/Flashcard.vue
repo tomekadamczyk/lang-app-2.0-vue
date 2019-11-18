@@ -14,7 +14,7 @@
     />
     <Button 
         v-bind:buttonName="btnNextValue"
-        v-on:clickButton="showTranslation"
+        v-on:clickButton="getCard"
         class="ml-3"
     />
     </div>
@@ -29,6 +29,13 @@ export default {
     },
     data() {
         return {
+            cards: [
+                { value: 'word', translation: 'slowo' },
+                { value: 'tramwaj', translation: 'tramvaj' },
+                { value: 'spodnie', translation: 'kalhoty' },
+                { value: 'kurtka', translation: 'bunda' },
+                { value: 'góry', translation: 'hory' },
+            ],
             btnWordValue: 'Check translation',
             btnNextValue: 'Next word',
             flashcardValue: 'Word',
@@ -39,8 +46,17 @@ export default {
     methods: {
         showTranslation() {
             return this.isTranslationActive = !this.isTranslationActive;
+        },
+        getRandomNumber(arr) {
+            const arrLength = arr.length;
+            const random = Math.floor(Math.random() * arrLength);
+            return random;
+        },
+        getCard() {
+            console.log(this.cards[this.getRandomNumber(this.cards)].value)
+            //console.log(this.getRandomNumber(this.cards))
         }
-    }
+    },
 }
 </script>
 
