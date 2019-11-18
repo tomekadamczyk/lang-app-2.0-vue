@@ -37,6 +37,7 @@ export default {
     height: auto;
     text-align: center;
     position: absolute;
+    background: $primary;
     top: 0;
     left: 0;
     z-index: 9999;

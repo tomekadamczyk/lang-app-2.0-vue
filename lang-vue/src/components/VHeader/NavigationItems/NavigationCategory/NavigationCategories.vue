@@ -41,9 +41,7 @@ export default {
 
     .nav-categories {
         list-style-type: none;
-        background: $primary;
         margin: 0;
-        height: 100%;
         padding: 20px 0;
 
         @include media-screen(tablet-up) {
