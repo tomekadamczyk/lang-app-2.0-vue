@@ -45,17 +45,25 @@ export default {
     },
     methods: {
         showTranslation() {
-            return this.isTranslationActive = !this.isTranslationActive;
+            return this.isTranslationActive = true;
         },
         getRandomNumber(arr) {
             const arrLength = arr.length;
             const random = Math.floor(Math.random() * arrLength);
             return random;
         },
+        generateNewCard() {
+            const card = this.cards[this.getRandomNumber(this.cards)];
+            this.flashcardValue = card.value;
+            this.flashcardTranslation = card.translation;
+        },
+        hideTranslation() {
+            return this.isTranslationActive = false;
+        },
         getCard() {
-            console.log(this.cards[this.getRandomNumber(this.cards)].value)
-            //console.log(this.getRandomNumber(this.cards))
-        }
+            this.hideTranslation();
+            this.generateNewCard();
+        },
     },
 }
 </script>
@@ -86,11 +94,12 @@ export default {
             padding: 4px 9px;
             color: $primary;
             opacity: 0;
-            transition: opacity .4s, transform .4s;
+            transition: opacity 0s, transform 0s;
 
             &.active {
                 opacity: 1;
                 transform: translate(-50%, 0);
+                transition: opacity .4s, transform .4s;
             }
 
             @media only screen and (min-width: 768px) {
