@@ -17,15 +17,18 @@
         v-on:clickButton="getCard"
         class="ml-3"
     />
+    <Dropdown />
     </div>
 </template>
 
 <script>
 import Button from '../UI/Button/Button.vue';
+import Dropdown from '../UI/Dropdown/Dropdown.vue';
 export default {
     name: 'Flashcard',
     components: {
         Button,
+        Dropdown
     },
     data() {
         return {
@@ -38,8 +41,8 @@ export default {
             ],
             btnWordValue: 'Check translation',
             btnNextValue: 'Next word',
-            flashcardValue: 'Word',
-            flashcardTranslation: 'Translation',
+            flashcardValue: 'Pick a word',
+            flashcardTranslation: null,
             isTranslationActive: false,
         };
     },
