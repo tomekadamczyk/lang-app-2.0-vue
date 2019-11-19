@@ -17,7 +17,9 @@
         v-on:clickButton="getCard"
         class="ml-3"
     />
-    <Dropdown />
+    <Dropdown 
+        v-on:selectChange="selectChanges"
+    />
     </div>
 </template>
 
@@ -32,21 +34,63 @@ export default {
     },
     data() {
         return {
-            cards: [
-                { value: 'word', translation: 'slowo' },
-                { value: 'tramwaj', translation: 'tramvaj' },
-                { value: 'spodnie', translation: 'kalhoty' },
-                { value: 'kurtka', translation: 'bunda' },
-                { value: 'góry', translation: 'hory' },
+            languages: [
+                { name: 'czech',
+                  cards: [
+                    { value: 'word', translation: 'slowo' },
+                    { value: 'tramwaj', translation: 'tramvaj' },
+                    { value: 'spodnie', translation: 'kalhoty' },
+                    { value: 'kurtka', translation: 'bunda' },
+                    { value: 'góry', translation: 'hory' },
+                 ]
+                },
+                { name: 'english',
+                  cards: [
+                    { value: 'word', translation: 'słowo' },
+                    { value: 'tramwaj', translation: 'train' },
+                    { value: 'spodnie', translation: 'pants' },
+                    { value: 'kurtka', translation: 'jacket' },
+                    { value: 'góry', translation: 'mountains' },
+                 ]
+                },
+                { name: 'german',
+                  cards: [
+                    { value: 'word', translation: 'slowen' },
+                    { value: 'tramwaj', translation: 'tramvajen' },
+                    { value: 'spodnie', translation: 'kalhoten' },
+                    { value: 'kurtka', translation: 'kurtken' },
+                    { value: 'góry', translation: 'góren' },
+                 ]
+                },
+                { name: 'italian',
+                  cards: [
+                    { value: 'word', translation: 'slovacoo' },
+                    { value: 'tramwaj', translation: 'tramvajo' },
+                    { value: 'spodnie', translation: 'spodniento' },
+                    { value: 'kurtka', translation: 'kurtkando' },
+                    { value: 'góry', translation: 'górento' },
+                 ]
+                },
             ],
             btnWordValue: 'Check translation',
             btnNextValue: 'Next word',
             flashcardValue: 'Pick a word',
             flashcardTranslation: null,
             isTranslationActive: false,
+            chosenCards: [],
+            chosenLanguage: null,
         };
     },
     methods: {
+        cardsByLanguage(lang) {
+            return this.languages.filter(language => {
+                if(language.name === lang) {
+                    return language.cards.forEach(card => {
+                        return this.chosenCards.push(card);
+                    });
+                }
+            })
+        },
         showTranslation() {
             return this.isTranslationActive = true;
         },
@@ -56,7 +100,7 @@ export default {
             return random;
         },
         generateNewCard() {
-            const card = this.cards[this.getRandomNumber(this.cards)];
+            const card = this.chosenCards[this.getRandomNumber(this.chosenCards)];
             this.flashcardValue = card.value;
             this.flashcardTranslation = card.translation;
         },
@@ -67,6 +111,11 @@ export default {
             this.hideTranslation();
             this.generateNewCard();
         },
+        selectChanges($event) {
+            this.chosenCards = [];
+            this.chosenLanguage = event.target.value;
+            this.cardsByLanguage(this.chosenLanguage);
+        }
     },
 }
 </script>

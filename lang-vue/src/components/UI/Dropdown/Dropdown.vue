@@ -1,6 +1,9 @@
 <template>
     <div>
-        <select v-model="selected">
+        <select 
+            v-model="selected"
+            v-on:change="changeValue"
+        >
             <Option 
                 v-for="(option, index) in options"
                 v-bind:key="index" 
@@ -30,6 +33,11 @@ export default {
             ],
         };
     },
+    methods: {
+        changeValue() {
+            this.$emit('selectChange', this.selected)
+        }
+    }
 }
 </script>
 
