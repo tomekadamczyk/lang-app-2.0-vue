@@ -146,11 +146,17 @@ export default {
         position: relative;
         font-size: 20px;
         margin-bottom: 10px;
+        word-wrap: break-word;
 
-        @media only screen and (min-width: 768px) {
+        @include media-screen(tablet-up) {
             font-size: 30px;
             margin-bottom: 0;
             margin-right: 20px;
+            width: 400px;
+        }
+
+        @include media-screen(desktop-up) {
+            width: 500px;
         }
 
         &__translation {
@@ -171,7 +177,7 @@ export default {
                 transition: opacity .4s, transform .4s;
             }
 
-            @media only screen and (min-width: 768px) {
+            @include media-screen(tablet-up) {
                 font-size: 20px;
             }
         }
