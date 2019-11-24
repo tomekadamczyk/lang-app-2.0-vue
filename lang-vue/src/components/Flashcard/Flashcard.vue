@@ -77,7 +77,7 @@ export default {
             ],
             btnWordValue: 'Check translation',
             btnNextValue: 'Next word',
-            flashcardValue: 'Pick a word',
+            flashcardValue: null,
             flashcardTranslation: null,
             isTranslationActive: false,
             chosenCards: [],
@@ -120,6 +120,11 @@ export default {
             this.cardsByLanguage(this.chosenLanguage);
         }
     },
+    created: function() {
+        this.chosenLanguage = this.languages[0].name;
+        this.cardsByLanguage(this.chosenLanguage);
+        this.getCard();
+    }
 }
 </script>
 
