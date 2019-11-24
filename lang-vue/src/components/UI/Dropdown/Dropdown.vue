@@ -3,6 +3,7 @@
         <select 
             v-model="selected"
             v-on:change="changeValue"
+            class="select"
         >
             <Option 
                 v-for="(option, index) in options"
@@ -42,5 +43,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../assets/scss/style.scss";
 
+    .select {
+        margin-top: 10px;
+        border: 1px solid $primary;
+        padding: 3px 7px;
+
+        option {
+            color: $primary;
+        }
+    }
 </style>
