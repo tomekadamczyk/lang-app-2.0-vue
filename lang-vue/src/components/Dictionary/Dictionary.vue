@@ -12,6 +12,7 @@
 <script>
 import VTable from '../UI/Table/VTable.vue';
 import Dropdown from '../UI/Dropdown/Dropdown.vue';
+import store from '../../store/index.js';
 
 export default {
     name: 'Dictionary',
@@ -21,66 +22,32 @@ export default {
     },
     methods: {
         cardsByLanguage(lang) {
-            return this.languages.filter(language => {
+            return store.state.languages.filter(language => {
                 if(language.name === lang) {
                     return language.cards.forEach(card => {
-                        return this.dictionary.push(card);
+                        return store.state.dictionary.push(card);
                     });
                 }
             })
         },
         selectChanges($event) {
-            this.dictionary = [];
-            this.chosenLanguage = event.target.value;
-            this.cardsByLanguage(this.chosenLanguage);
+            store.state.dictionary = [];
+            store.state.defaultLanguage = event.target.value;
+            this.cardsByLanguage(store.state.defaultLanguage);
         }
     },
     created: function() {
-        this.chosenLanguage = this.languages[0].name;
-        this.cardsByLanguage(this.chosenLanguage);
+        store.state.defaultLanguage = store.state.languages[0].name;
+        this.cardsByLanguage(store.state.defaultLanguage);
     },
     data() {
         return {
-            chosenLanguage: 'czech',
-            dictionary: [],
-            languages: [
-                { name: 'czech',
-                  cards: [
-                    { value: 'word', translation: 'slowo' },
-                    { value: 'tramwaj', translation: 'tramvaj' },
-                    { value: 'spodnie', translation: 'kalhoty' },
-                    { value: 'kurtka', translation: 'bunda' },
-                    { value: 'góry', translation: 'hory' },
-                 ]
-                },
-                { name: 'english',
-                  cards: [
-                    { value: 'word', translation: 'słowo' },
-                    { value: 'tramwaj', translation: 'train' },
-                    { value: 'spodnie', translation: 'pants' },
-                    { value: 'kurtka', translation: 'jacket' },
-                    { value: 'góry', translation: 'mountains' },
-                 ]
-                },
-                { name: 'german',
-                  cards: [
-                    { value: 'word', translation: 'slowen' },
-                    { value: 'tramwaj', translation: 'tramvajen' },
-                    { value: 'spodnie', translation: 'kalhoten' },
-                    { value: 'kurtka', translation: 'kurtken' },
-                    { value: 'góry', translation: 'góren' },
-                 ]
-                },
-                { name: 'italian',
-                  cards: [
-                    { value: 'word', translation: 'slovacoo' },
-                    { value: 'tramwaj', translation: 'tramvajo' },
-                    { value: 'spodnie', translation: 'spodniento' },
-                    { value: 'kurtka', translation: 'kurtkando' },
-                    { value: 'góry', translation: 'górento' },
-                 ]
-                },
-            ],
+            sharedState: store.state,
+        };
+    },
+    computed: {
+        dictionary() {
+            return store.state.dictionary;
         }
     }
 }
