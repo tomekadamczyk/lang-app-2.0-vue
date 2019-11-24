@@ -43,7 +43,7 @@ export default {
                 {id: 0, name: 'Dashboard', placeholder: 'O', url: '/', category: general},
                 {id: 1, name: 'Flashcards', placeholder: 'O', url: '/flashcards', category: excercises},
                 {id: 2, name: 'Hangman', placeholder: 'O', url: '/hangman', category: excercises},
-                {id: 3, name: 'test1', placeholder: 'O', url: '/hangman', category: test},
+                {id: 3, name: 'Dictionary', placeholder: 'O', url: '/dictionary', category: excercises},
                 {id: 4, name: 'test2', placeholder: 'O', url: '/hangman', category: test},
                 {id: 5, name: 'fav', placeholder: 'O', url: '/hangman', category: favorites},
                 {id: 6, name: 'fav2', placeholder: 'O', url: '/hangman', category: favorites},

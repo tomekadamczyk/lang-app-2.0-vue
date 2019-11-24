@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Flashcards from './views/Flashcards.vue';
 import Hangman from './views/Hangman.vue';
+import Dictionary from './views/Dictionary.vue';
 
 Vue.use(Router);
 
@@ -27,6 +28,11 @@ export default new Router({
       path: '/hangman',
       name: 'hangman',
       component: Hangman,
+    },
+    {
+      path: '/dictionary',
+      name: 'dictionary',
+      component: Dictionary,
     },
   ],
 });
