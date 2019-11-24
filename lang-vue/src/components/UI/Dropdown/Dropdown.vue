@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div class="select__selected-value">Chosen language: <span>{{ selected }}</span></div>
         <select 
             v-model="selected"
             v-on:change="changeValue"
@@ -11,7 +12,6 @@
                 v-bind:value="option.value"
             >{{option.name}}</Option>
         </select>
-        <span>Selected: {{ selected }}</span>
     </div>
 </template>
 
@@ -49,6 +49,14 @@ export default {
         margin-top: 10px;
         border: 1px solid $primary;
         padding: 3px 7px;
+
+        &__selected-value {
+
+            span {
+                text-transform: capitalize;
+                font-weight: bold;
+            }
+        }
 
         option {
             color: $primary;

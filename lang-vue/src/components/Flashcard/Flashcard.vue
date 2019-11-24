@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="flashcard-container flex-center">
     <div class="flashcard">{{flashcardValue}}
         <div 
             class="flashcard__translation"
@@ -8,18 +8,21 @@
             {{flashcardTranslation}}
         </div>
     </div>
-    <Button 
-        v-bind:buttonName="btnWordValue"
-        v-on:clickButton="showTranslation"
-    />
-    <Button 
-        v-bind:buttonName="btnNextValue"
-        v-on:clickButton="getCard"
-        class="ml-3"
-    />
-    <Dropdown 
-        v-on:selectChange="selectChanges"
-    />
+    <div class="flashcard__options">
+        <Button 
+            v-bind:buttonName="btnWordValue"
+            v-on:clickButton="showTranslation"
+            class="flashcard__button"
+        />
+        <Button 
+            v-bind:buttonName="btnNextValue"
+            v-on:clickButton="getCard"
+            class="flashcard__button"
+        />
+        <Dropdown 
+            v-on:selectChange="selectChanges"
+        />
+    </div>
     </div>
 </template>
 
@@ -123,17 +126,26 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/scss/style.scss";
 
+    .flashcard-container {
+        flex-direction: column;
+
+        @include media-screen(tablet-up) {
+            flex-direction: row;
+        }
+    }
+
     .flashcard {
         background: $primary;
         color: $white;
         padding: 50px 20px;
-        max-width: 400px;
-        margin: 0 auto 20px;
         position: relative;
         font-size: 20px;
+        margin-bottom: 10px;
 
         @media only screen and (min-width: 768px) {
             font-size: 30px;
+            margin-bottom: 0;
+            margin-right: 20px;
         }
 
         &__translation {
@@ -157,6 +169,16 @@ export default {
             @media only screen and (min-width: 768px) {
                 font-size: 20px;
             }
+        }
+
+        &__options {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        &__button {
+            margin-bottom: 12px;
         }
     }
 </style>

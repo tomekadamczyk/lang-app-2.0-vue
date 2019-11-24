@@ -28,7 +28,6 @@ export default {
         padding: 4px 7px;
         background: $primary;
         color: $white;
-        border-radius: 12px;
         border-color: transparent;
         cursor: pointer;
         transition: background .3s;
