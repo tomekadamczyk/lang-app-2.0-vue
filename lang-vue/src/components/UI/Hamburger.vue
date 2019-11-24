@@ -25,7 +25,7 @@ export default {
 @import "../../assets/scss/style.scss";
 
     .hamburger {
-        position: absolute;
+        position: fixed;
         top: 20px;
         right: 30px;
         cursor: pointer;

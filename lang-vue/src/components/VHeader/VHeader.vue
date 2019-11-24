@@ -36,7 +36,7 @@ export default {
     width: 100%;
     height: auto;
     text-align: center;
-    position: absolute;
+    position: fixed;
     background: $primary;
     top: 0;
     left: 0;

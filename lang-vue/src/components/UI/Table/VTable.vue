@@ -31,7 +31,7 @@ export default {
 
     .table {
         width: 100%;
-        margin: auto;
+        margin: 30px auto 0;
         border-collapse: collapse;
 
         &__row {
