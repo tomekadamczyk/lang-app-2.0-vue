@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>This is a dictionary page</h1>
-    <Flashcard />
+    <Dictionary />
   </div>
 </template>
 
