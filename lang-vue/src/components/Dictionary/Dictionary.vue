@@ -12,7 +12,7 @@
 <script>
 import VTable from '../UI/Table/VTable.vue';
 import Dropdown from '../UI/Dropdown/Dropdown.vue';
-import store from '../../store/index.js';
+import store from '../../store.js';
 
 export default {
     name: 'Dictionary',
@@ -21,24 +21,19 @@ export default {
         Dropdown
     },
     methods: {
-        cardsByLanguage(lang) {
-            return store.state.languages.filter(language => {
-                if(language.name === lang) {
-                    return language.cards.forEach(card => {
-                        return store.state.dictionary.push(card);
-                    });
-                }
-            })
+        onUpdateDictionary(langName) {
+            this.$store.dispatch('updateDictionary', langName);
         },
         selectChanges($event) {
             store.state.dictionary = [];
             store.state.defaultLanguage = event.target.value;
-            this.cardsByLanguage(store.state.defaultLanguage);
+            this.onUpdateDictionary(store.state.defaultLanguage)
         }
     },
     created: function() {
+        store.state.dictionary = [];
         store.state.defaultLanguage = store.state.languages[0].name;
-        this.cardsByLanguage(store.state.defaultLanguage);
+        this.onUpdateDictionary(store.state.defaultLanguage);
     },
     data() {
         return {
@@ -47,7 +42,7 @@ export default {
     },
     computed: {
         dictionary() {
-            return store.state.dictionary;
+            return this.$store.state.dictionary;
         }
     }
 }
