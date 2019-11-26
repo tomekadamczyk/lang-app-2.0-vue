@@ -29,6 +29,8 @@
 <script>
 import Button from '../UI/Button/Button.vue';
 import Dropdown from '../UI/Dropdown/Dropdown.vue';
+import store from '../../store.js';
+
 export default {
     name: 'Flashcard',
     components: {
@@ -37,62 +39,21 @@ export default {
     },
     data() {
         return {
-            languages: [
-                { name: 'czech',
-                  cards: [
-                    { value: 'word', translation: 'slowo' },
-                    { value: 'tramwaj', translation: 'tramvaj' },
-                    { value: 'spodnie', translation: 'kalhoty' },
-                    { value: 'kurtka', translation: 'bunda' },
-                    { value: 'góry', translation: 'hory' },
-                 ]
-                },
-                { name: 'english',
-                  cards: [
-                    { value: 'word', translation: 'słowo' },
-                    { value: 'tramwaj', translation: 'train' },
-                    { value: 'spodnie', translation: 'pants' },
-                    { value: 'kurtka', translation: 'jacket' },
-                    { value: 'góry', translation: 'mountains' },
-                 ]
-                },
-                { name: 'german',
-                  cards: [
-                    { value: 'word', translation: 'slowen' },
-                    { value: 'tramwaj', translation: 'tramvajen' },
-                    { value: 'spodnie', translation: 'kalhoten' },
-                    { value: 'kurtka', translation: 'kurtken' },
-                    { value: 'góry', translation: 'góren' },
-                 ]
-                },
-                { name: 'italian',
-                  cards: [
-                    { value: 'word', translation: 'slovacoo' },
-                    { value: 'tramwaj', translation: 'tramvajo' },
-                    { value: 'spodnie', translation: 'spodniento' },
-                    { value: 'kurtka', translation: 'kurtkando' },
-                    { value: 'góry', translation: 'górento' },
-                 ]
-                },
-            ],
             btnWordValue: 'Check translation',
             btnNextValue: 'Next word',
             flashcardValue: null,
             flashcardTranslation: null,
             isTranslationActive: false,
-            chosenCards: [],
-            chosenLanguage: null,
         };
     },
+    computed: {
+        dictionary() {
+            return this.$store.state.dictionary;
+        },
+    },
     methods: {
-        cardsByLanguage(lang) {
-            return this.languages.filter(language => {
-                if(language.name === lang) {
-                    return language.cards.forEach(card => {
-                        return this.chosenCards.push(card);
-                    });
-                }
-            })
+        onUpdateDictionary(langName) {
+            this.$store.dispatch('updateDictionary', langName);
         },
         showTranslation() {
             return this.isTranslationActive = true;
@@ -103,7 +64,7 @@ export default {
             return random;
         },
         generateNewCard() {
-            const card = this.chosenCards[this.getRandomNumber(this.chosenCards)];
+            const card = this.dictionary[this.getRandomNumber(store.state.dictionary)];
             this.flashcardValue = card.value;
             this.flashcardTranslation = card.translation;
         },
@@ -115,14 +76,14 @@ export default {
             this.generateNewCard();
         },
         selectChanges($event) {
-            this.chosenCards = [];
-            this.chosenLanguage = event.target.value;
-            this.cardsByLanguage(this.chosenLanguage);
+            store.state.dictionary = [];
+            store.state.defaultLanguage = event.target.value;
+            this.onUpdateDictionary(store.state.defaultLanguage)
         }
     },
     created: function() {
-        this.chosenLanguage = this.languages[0].name;
-        this.cardsByLanguage(this.chosenLanguage);
+        store.state.defaultLanguage = store.state.languages[0].name;
+        this.onUpdateDictionary(store.state.defaultLanguage)
         this.getCard();
     }
 }
