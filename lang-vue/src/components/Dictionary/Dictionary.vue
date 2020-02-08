@@ -1,9 +1,9 @@
 <template>
     <div>
-        <Dropdown 
+        <Dropdown
             v-on:selectChange="selectChanges"
         />
-        <VTable 
+        <VTable
             v-bind:dictionary="dictionary"
         />
     </div>
@@ -12,40 +12,40 @@
 <script>
 import VTable from '../UI/Table/VTable.vue';
 import Dropdown from '../UI/Dropdown/Dropdown.vue';
-import store from '../../store.js';
+import store from '../../store';
 
 export default {
-    name: 'Dictionary',
-    components: {
-        VTable,
-        Dropdown
+  name: 'Dictionary',
+  components: {
+    VTable,
+    Dropdown,
+  },
+  methods: {
+    onUpdateDictionary(langName) {
+      this.$store.dispatch('updateDictionary', langName);
     },
-    methods: {
-        onUpdateDictionary(langName) {
-            this.$store.dispatch('updateDictionary', langName);
-        },
-        selectChanges($event) {
-            store.state.dictionary = [];
-            store.state.defaultLanguage = event.target.value;
-            this.onUpdateDictionary(store.state.defaultLanguage)
-        }
+    selectChanges($event) {
+      store.state.dictionary = [];
+      store.state.defaultLanguage = event.target.value;
+      this.onUpdateDictionary(store.state.defaultLanguage);
     },
-    created: function() {
-        store.state.dictionary = [];
-        store.state.defaultLanguage = store.state.languages[0].name;
-        this.onUpdateDictionary(store.state.defaultLanguage);
+  },
+  created() {
+    store.state.dictionary = [];
+    store.state.defaultLanguage = store.state.languages[0].name;
+    this.onUpdateDictionary(store.state.defaultLanguage);
+  },
+  data() {
+    return {
+      sharedState: store.state,
+    };
+  },
+  computed: {
+    dictionary() {
+      return this.$store.state.dictionary;
     },
-    data() {
-        return {
-            sharedState: store.state,
-        };
-    },
-    computed: {
-        dictionary() {
-            return this.$store.state.dictionary;
-        }
-    }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
