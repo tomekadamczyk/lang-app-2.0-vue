@@ -51,9 +51,20 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
-
+    UPDATE_DICTIONARY(state, lang) {
+      // eslint-disable-next-line array-callback-return
+      state.languages.filter((language) => {
+        if (language.name === lang) {
+          language.cards.forEach((card) => {
+            state.dictionary.push(card);
+          });
+        }
+      });
+    },
   },
   actions: {
-
+    updateDictionary(context, payload) {
+      context.commit('UPDATE_DICTIONARY', payload);
+    },
   },
 });
