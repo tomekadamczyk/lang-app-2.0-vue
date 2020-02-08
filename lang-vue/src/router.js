@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Flashcards from './views/Flashcards.vue';
 import Hangman from './views/Hangman.vue';
 import Dictionary from './views/Dictionary.vue';
+import WordView from './views/WordView.vue';
 
 Vue.use(Router);
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/dictionary',
       name: 'dictionary',
       component: Dictionary,
+    },
+    {
+      path: '/dictionary/:wordId',
+      name: 'word',
+      component: WordView,
     },
   ],
 });
