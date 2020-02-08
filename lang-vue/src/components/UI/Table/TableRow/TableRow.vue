@@ -1,16 +1,10 @@
 <template>
 <tr class="table__row">
-    <TableCell 
-        v-bind:value="lp"
-        class="table__lp"
-    />
-    <TableCell 
-        v-bind:value="value"
-        class="table__content"
-    />
-    <TableCell 
-        v-bind:value="translation"
-        class="table__content"
+    <TableCell
+        v-for="(data, index) in wordData"
+        v-bind:value="data.output"
+        v-bind:class="data.className"
+        v-bind:key="index"
     />
 </tr>
 </template>
@@ -19,22 +13,31 @@
 import TableCell from './TableCell/TableCell.vue';
 
 export default {
-    name: 'TableRow',
-    components: {
-        TableCell
+  name: 'TableRow',
+  components: {
+    TableCell,
+  },
+  props: {
+    value: {
+      type: String,
     },
-    props: {
-        value: {
-            type: String,
-        },
-        translation: {
-            type: String,
-        },
-        lp: {
-            type: Number,
-        },
+    translation: {
+      type: String,
     },
-}
+    lp: {
+      type: Number,
+    },
+  },
+  data() {
+    return {
+      wordData: [
+        { output: this.lp, className: 'table__lp' },
+        { output: this.value, className: 'table__content' },
+        { output: this.translation, className: 'table__content' },
+      ],
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
