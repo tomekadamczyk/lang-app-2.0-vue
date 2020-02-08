@@ -1,8 +1,8 @@
 <template>
     <ul class="nav-categories">
-        <NavigationCategory 
+        <NavigationCategory
             v-for="(category, index) in categories"
-            v-bind:key="index" 
+            v-bind:key="index"
             v-bind:category="category"
             v-bind:activeHeader="activeHeader"
             v-bind:class="{active: activeHeader}"
@@ -16,23 +16,26 @@
 <script>
 import NavigationCategory from './NavigationCategory.vue';
 import NAV_CATEGORIES from '../../../../data/navCategories';
-const { general, excercises, test, favorites } = NAV_CATEGORIES;
+
+const {
+  general, excercises, test, favorites,
+} = NAV_CATEGORIES;
 
 export default {
-    name: 'NavigationCategories',
-    components: {
-        NavigationCategory,
+  name: 'NavigationCategories',
+  components: {
+    NavigationCategory,
+  },
+  props: {
+    activeHeader: {
+      type: Boolean,
     },
-    props: {
-        activeHeader: {
-            type: Boolean,
-        },
-    },
-    data() {
-        return {
-            categories: [ general, excercises, test, favorites ],
-        };
-    },
+  },
+  data() {
+    return {
+      categories: [general, excercises, test, favorites],
+    };
+  },
 };
 </script>
 
