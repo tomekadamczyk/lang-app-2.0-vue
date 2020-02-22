@@ -1,12 +1,11 @@
 <template>
-<tr class="table__row">
-    <TableCell
-        v-for="(data, index) in wordData"
-        v-bind:value="data.output"
-        v-bind:class="data.className"
-        v-bind:key="index"
-    />
-</tr>
+  <tr class="table__row">
+      <TableCell
+          v-for="(data, index) in singleRowData"
+          v-bind:tableCell="data"
+          v-bind:key="index"
+      />
+  </tr>
 </template>
 
 <script>
@@ -18,31 +17,42 @@ export default {
     TableCell,
   },
   props: {
-    value: {
-      type: String,
+    tableRow: {
+      type: Object,
     },
-    translation: {
-      type: String,
-    },
-    lp: {
+    index: {
       type: Number,
     },
   },
   data() {
     return {
-      wordData: [
-        { output: this.lp, className: 'table__lp' },
-        { output: this.value, className: 'table__content' },
-        { output: this.translation, className: 'table__content' },
-      ],
+      processedTableRowData: [],
     };
+  },
+  methods: {
+    fillArrayByObjectKeys(destinationArray, sourceObject) {
+      Object.keys(sourceObject).forEach((element) => {
+        destinationArray.push(sourceObject[element]);
+      });
+    },
+    generateDataFromObject() {
+      this.processedTableRowData = [];
+      this.processedTableRowData.push(this.index);
+      this.fillArrayByObjectKeys(this.processedTableRowData, this.tableRow);
+      return this.processedTableRowData;
+    },
+  },
+  computed: {
+    singleRowData() {
+      this.generateDataFromObject();
+      return this.processedTableRowData;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../../../../assets/scss/style.scss";
-
 
         .table__content {
             font-weight: bold;

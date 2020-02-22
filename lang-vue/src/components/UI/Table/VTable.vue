@@ -1,11 +1,10 @@
 <template>
     <table class="table">
         <TableRow
-        v-for="(word, index) in dictionary"
-        v-bind:key="index"
-        v-bind:lp="index + 1"
-        v-bind:value="word.value"
-        v-bind:translation="word.translation"
+            v-for="(item, index) in tableDataArray"
+            v-bind:key="index"
+            v-bind:tableRow="item"
+            v-bind:index="index + 1"
         />
     </table>
 </template>
@@ -14,16 +13,16 @@
 import TableRow from './TableRow/TableRow.vue';
 
 export default {
-    name: 'VTable',
-    components: {
-        TableRow,
+  name: 'VTable',
+  components: {
+    TableRow,
+  },
+  props: {
+    tableDataArray: {
+      type: Array,
     },
-    props: {
-        dictionary: {
-            type: Array,
-        },
-    },
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
