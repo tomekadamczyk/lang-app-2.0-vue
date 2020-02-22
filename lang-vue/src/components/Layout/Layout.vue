@@ -1,15 +1,15 @@
 <template>
     <div class="layout-wrapper">
-        <Hamburger 
-            v-bind:activeHeader="isLayoutActive" 
-            v-on:toggle="toggleNavigation" 
+        <Hamburger
+            v-bind:activeHeader="isLayoutActive"
+            v-on:toggle="toggleNavigation"
         />
-        <VHeader 
+        <VHeader
             v-bind:activeHeader="isLayoutActive"
             v-on:closeNav="closeNav"
         />
-        <main 
-            class="layout" 
+        <main
+            class="layout"
             v-bind:class="{active: isLayoutActive}"
         >
             <slot/>
@@ -22,26 +22,26 @@ import VHeader from '../VHeader/VHeader.vue';
 import Hamburger from '../UI/Hamburger.vue';
 
 export default {
-    name: 'Layout',
-    components: {     
-        VHeader,
-        Hamburger,
+  name: 'Layout',
+  components: {
+    VHeader,
+    Hamburger,
+  },
+  data() {
+    return {
+      isLayoutActive: false,
+    };
+  },
+  methods: {
+    toggleNavigation() {
+      this.isLayoutActive = !this.isLayoutActive;
     },
-    data() {
-        return {
-            isLayoutActive: false,
-        };
+    closeNav() {
+      console.log('asdasd');
+      this.isLayoutActive = false;
     },
-    methods: {
-        toggleNavigation() {
-            return this.isLayoutActive = !this.isLayoutActive;
-        },
-        closeNav() {
-            console.log('asdasd')
-            return this.isLayoutActive = false;
-        }
-    }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -55,6 +55,7 @@ export default {
         width: 100%;
         height: auto;
         position: relative;
+        padding: 0 20px;
 
         @include media-screen(tablet-up) {
             width: calc(100% - 70px);
