@@ -5,6 +5,7 @@
             v-bind:key="index"
             v-bind:tableRow="item"
             v-bind:index="index + 1"
+            v-bind:dataToHide="dataToHide"
         />
     </table>
 </template>
@@ -19,6 +20,9 @@ export default {
   },
   props: {
     tableDataArray: {
+      type: Array,
+    },
+    dataToHide: {
       type: Array,
     },
   },

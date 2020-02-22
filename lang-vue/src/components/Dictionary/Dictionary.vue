@@ -5,6 +5,7 @@
         />
         <VTable
             v-bind:tableDataArray="dictionary"
+            v-bind:dataToHide="propsToHide"
         />
     </div>
 </template>
@@ -38,6 +39,7 @@ export default {
   data() {
     return {
       sharedState: store.state,
+      propsToHide: ['noun', 'verb', 'adjective'],
     };
   },
   computed: {

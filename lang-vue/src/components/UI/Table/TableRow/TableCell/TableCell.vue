@@ -24,4 +24,13 @@ export default {
 <style lang="scss">
 @import "../../../../../assets/scss/style.scss";
 
+  .table__id {
+    width: 30px;
+  }
+
+  .table__content {
+    width: 120px;
+    font-weight: bold;
+  }
+
 </style>

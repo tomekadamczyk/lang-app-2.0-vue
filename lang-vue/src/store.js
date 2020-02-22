@@ -7,15 +7,24 @@ export default new Vuex.Store({
   state: {
     defaultLanguage: 'czech',
     dictionary: [],
+    partsOfSpeech: {
+      noun: 'noun',
+      verb: 'verb',
+      adjective: 'adjective',
+      adverb: 'adverb',
+      pronoun: 'pronoun',
+      preposition: 'preposition',
+      conjunction: 'conjunction',
+    },
     languages: [
       {
         name: 'czech',
         cards: [
-          { value: 'word', translation: 'slowo' },
-          { value: 'tramwaj', translation: 'tramvaj' },
-          { value: 'spodnie', translation: 'kalhoty' },
-          { value: 'kurtka', translation: 'bunda' },
-          { value: 'góry', translation: 'hory' },
+          { value: 'word', translation: 'slowo', partOfSpeech: 'noun' },
+          { value: 'tramwaj', translation: 'tramvaj', partOfSpeech: 'noun' },
+          { value: 'spodnie', translation: 'kalhoty', partOfSpeech: 'noun' },
+          { value: 'kurtka', translation: 'bunda', partOfSpeech: 'noun' },
+          { value: 'góry', translation: 'hory', partOfSpeech: 'noun' },
         ],
       },
       {

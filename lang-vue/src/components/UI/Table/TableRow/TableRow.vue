@@ -4,6 +4,7 @@
           v-for="(data, index) in singleRowData"
           v-bind:tableCell="data"
           v-bind:key="index"
+          v-bind:dataToHide="dataToHide"
       />
   </tr>
 </template>
@@ -23,6 +24,9 @@ export default {
     index: {
       type: Number,
     },
+    dataToHide: {
+      type: Array,
+    },
   },
   data() {
     return {
@@ -39,13 +43,17 @@ export default {
       this.processedTableRowData = [];
       this.processedTableRowData.push(this.index);
       this.fillArrayByObjectKeys(this.processedTableRowData, this.tableRow);
+      this.renderReadyData();
       return this.processedTableRowData;
+    },
+    renderReadyData() {
+      return this.processedTableRowData.filter(data => !this.dataToHide.includes(data));
     },
   },
   computed: {
     singleRowData() {
       this.generateDataFromObject();
-      return this.processedTableRowData;
+      return this.renderReadyData();
     },
   },
 };
@@ -53,9 +61,5 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../../assets/scss/style.scss";
-
-        .table__content {
-            font-weight: bold;
-        }
 
 </style>
