@@ -4,7 +4,7 @@
             v-on:selectChange="selectChanges"
         />
         <VTable
-            v-bind:dictionary="dictionary"
+            v-bind:tableDataArray="dictionary"
         />
     </div>
 </template>
@@ -26,7 +26,7 @@ export default {
     },
     selectChanges($event) {
       store.state.dictionary = [];
-      store.state.defaultLanguage = event.target.value;
+      store.state.defaultLanguage = $event;
       this.onUpdateDictionary(store.state.defaultLanguage);
     },
   },
