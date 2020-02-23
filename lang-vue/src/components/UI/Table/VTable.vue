@@ -3,9 +3,9 @@
       <TableRow
         v-for="(item, index) in tableDataArray"
         v-bind:key="index"
+        v-bind:routeIndex="index"
         v-bind:tableRow="item"
         v-bind:index="index + 1"
-        v-bind:dataToHide="dataToHide"
         v-bind:checkRouter="checkRouter"
       />
     </table>
@@ -21,9 +21,6 @@ export default {
   },
   props: {
     tableDataArray: {
-      type: Array,
-    },
-    dataToHide: {
       type: Array,
     },
     checkRouter: {

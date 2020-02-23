@@ -4,7 +4,7 @@
           v-for="(data, index) in singleRowData"
           v-bind:tableCell="data"
           v-bind:key="index"
-          v-bind:dataToHide="dataToHide"
+          v-bind:routeIndex="routeIndex"
           v-bind:checkRouter="checkRouter"
           v-bind:cellToLink="cellToLink"
       />
@@ -26,11 +26,11 @@ export default {
     index: {
       type: Number,
     },
-    dataToHide: {
-      type: Array,
-    },
     checkRouter: {
       type: [Number, Boolean],
+    },
+    routeIndex: {
+      type: Number,
     },
   },
   data() {
@@ -49,12 +49,8 @@ export default {
       this.processedTableRowData = [];
       this.processedTableRowData.push(this.index);
       this.fillArrayByObjectKeys(this.processedTableRowData, this.tableRow);
-      this.renderReadyData();
       this.getCellIndex();
       return this.processedTableRowData;
-    },
-    renderReadyData() {
-      return this.processedTableRowData.filter(data => !this.dataToHide.includes(data));
     },
     getCellIndex() {
       this.cellToLink = this.processedTableRowData[this.checkRouter];
@@ -63,7 +59,9 @@ export default {
   computed: {
     singleRowData() {
       this.generateDataFromObject();
-      return this.renderReadyData();
+      console.log(this.tableRow)
+      console.log(this.processedTableRowData)
+      return this.processedTableRowData;
     },
   },
 };

@@ -3,7 +3,7 @@
     :class="[typeof cellValue === 'number' ? 'table__id' : 'table__content']"
   >
     <span>
-      <router-link v-if="typeof tableCell === 'string' && cellValue === cellToLink" :to="cellValue">
+      <router-link v-if="typeof tableCell === 'string' && cellValue === cellToLink" :to="link">
         {{cellValue}}
       </router-link>
       <span v-else>
@@ -35,6 +35,17 @@ export default {
     cellToLink: {
       type: String,
     },
+    routeIndex: {
+      type: Number,
+    },
+    index: {
+      type: Number,
+    },
+  },
+  data() {
+    return {
+      link: `/dictionary/${this.routeIndex}`,
+    };
   },
   computed: {
     cellValue() {
