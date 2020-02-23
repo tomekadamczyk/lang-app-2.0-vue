@@ -59,8 +59,6 @@ export default {
   computed: {
     singleRowData() {
       this.generateDataFromObject();
-      console.log(this.tableRow)
-      console.log(this.processedTableRowData)
       return this.processedTableRowData;
     },
   },
