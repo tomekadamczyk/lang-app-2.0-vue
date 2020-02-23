@@ -7,24 +7,44 @@ export default new Vuex.Store({
   state: {
     defaultLanguage: 'czech',
     dictionary: [],
-    partsOfSpeech: {
-      noun: 'noun',
-      verb: 'verb',
-      adjective: 'adjective',
-      adverb: 'adverb',
-      pronoun: 'pronoun',
-      preposition: 'preposition',
-      conjunction: 'conjunction',
-    },
+    wordPageData: [],
+    partsOfSpeech: [
+      { value: 'noun' },
+      { value: 'verb' },
+      { value: 'adjective' },
+      { value: 'adverb' },
+      { value: 'pronoun' },
+      { value: 'preposition' },
+      { value: 'conjunction' },
+    ],
+    grammaticalCases: [
+      { value: 'nominative' },
+      { value: 'genitive' },
+      { value: 'dative' },
+      { value: 'accusative' },
+      { value: 'instrumental' },
+      { value: 'locative' },
+      { value: 'vocative' },
+    ],
     languages: [
       {
         name: 'czech',
         cards: [
-          { value: 'word', translation: 'slowo', partOfSpeech: 'noun' },
-          { value: 'tramwaj', translation: 'tramvaj', partOfSpeech: 'noun' },
-          { value: 'spodnie', translation: 'kalhoty', partOfSpeech: 'noun' },
-          { value: 'kurtka', translation: 'bunda', partOfSpeech: 'noun' },
-          { value: 'góry', translation: 'hory', partOfSpeech: 'noun' },
+          {
+            id: 0, value: 'word', translation: 'slowo', partOfSpeech: 'noun', grammaticalCase: 'nominative', nominative: 'słowo', genitive: 'słowa', dative: 'słowu', accusative: 'słowo', instrumental: 'słowie', locative: 'słowem', vocative: 'słowo!',
+          },
+          {
+            id: 1, value: 'tramwaj', translation: 'tramvaj', partOfSpeech: 'noun', grammaticalCase: 'nominative', nominative: 'słowo', genitive: 'słowa', dative: 'słowu', accusative: 'słowo', instrumental: 'słowie', locative: 'słowem', vocative: 'słowo!',
+          },
+          {
+            id: 2, value: 'spodnie', translation: 'kalhoty', partOfSpeech: 'noun', grammaticalCase: 'nominative', nominative: 'słowo', genitive: 'słowa', dative: 'słowu', accusative: 'słowo', instrumental: 'słowie', locative: 'słowem', vocative: 'słowo!',
+          },
+          {
+            id: 3, value: 'kurtka', translation: 'bunda', partOfSpeech: 'noun', grammaticalCase: 'nominative', nominative: 'słowo', genitive: 'słowa', dative: 'słowu', accusative: 'słowo', instrumental: 'słowie', locative: 'słowem', vocative: 'słowo!',
+          },
+          {
+            id: 4, value: 'góry', translation: 'hory', partOfSpeech: 'noun', grammaticalCase: 'nominative', nominative: 'słowo', genitive: 'słowa', dative: 'słowu', accusative: 'słowo', instrumental: 'słowie', locative: 'słowem', vocative: 'słowo!',
+          },
         ],
       },
       {
