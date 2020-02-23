@@ -5,7 +5,6 @@
         />
         <VTable
             v-bind:tableDataArray="dictionary"
-            v-bind:dataToHide="propsToHide"
             v-bind:checkRouter="checkRouter"
         />
     </div>
@@ -31,36 +30,36 @@ export default {
       store.state.defaultLanguage = $event;
       this.onUpdateDictionary(store.state.defaultLanguage);
     },
-    concatDataToHide() {
-      store.state.grammaticalCases.forEach((caseName) => {
-        this.propsToHide.push(caseName.value);
+    generateData() {
+      const dictionary = { ...store.state.dictionary };
+      const newDictionaryObjects = {};
+      const arrayOfDictionaryObjects = [];
+      Object.keys(dictionary).forEach((item) => {
+        newDictionaryObjects[item] = {
+          value: dictionary[item].value,
+          translation: dictionary[item].translation,
+        };
+        arrayOfDictionaryObjects.push(newDictionaryObjects[item]);
       });
-      store.state.partsOfSpeech.forEach((partName) => {
-        this.propsToHide.push(partName.value);
-      });
-      store.state.grammaticalCases.forEach((caseName) => {
-        store.state.dictionary.forEach((row) => {
-          delete row[caseName.value];
-        });
-      });
+      this.preparedData = arrayOfDictionaryObjects;
+      return this.preparedData;
     },
   },
   created() {
     store.state.dictionary = [];
     store.state.defaultLanguage = store.state.languages[0].name;
     this.onUpdateDictionary(store.state.defaultLanguage);
-    this.concatDataToHide();
   },
   data() {
     return {
       sharedState: store.state,
-      propsToHide: [],
       checkRouter: 1,
+      preparedData: [],
     };
   },
   computed: {
     dictionary() {
-      return this.$store.state.dictionary;
+      return this.generateData();
     },
   },
 };
