@@ -5,6 +5,8 @@
           v-bind:tableCell="data"
           v-bind:key="index"
           v-bind:dataToHide="dataToHide"
+          v-bind:checkRouter="checkRouter"
+          v-bind:cellToLink="cellToLink"
       />
   </tr>
 </template>
@@ -27,10 +29,14 @@ export default {
     dataToHide: {
       type: Array,
     },
+    checkRouter: {
+      type: [Number, Boolean],
+    },
   },
   data() {
     return {
       processedTableRowData: [],
+      cellToLink: null,
     };
   },
   methods: {
@@ -44,10 +50,14 @@ export default {
       this.processedTableRowData.push(this.index);
       this.fillArrayByObjectKeys(this.processedTableRowData, this.tableRow);
       this.renderReadyData();
+      this.getCellIndex();
       return this.processedTableRowData;
     },
     renderReadyData() {
       return this.processedTableRowData.filter(data => !this.dataToHide.includes(data));
+    },
+    getCellIndex() {
+      this.cellToLink = this.processedTableRowData[this.checkRouter];
     },
   },
   computed: {

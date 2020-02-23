@@ -1,5 +1,22 @@
 <template>
-  <td :class="[typeof cellValue === 'number' ? 'table__id' : 'table__content']">{{cellValue}}</td>
+  <td v-if="checkRouter !== false"
+    :class="[typeof cellValue === 'number' ? 'table__id' : 'table__content']"
+  >
+    <span>
+      <router-link v-if="typeof tableCell === 'string' && cellValue === cellToLink" :to="cellValue">
+        {{cellValue}}
+      </router-link>
+      <span v-else>
+        {{cellValue}}
+      </span>
+    </span>
+  </td>
+  <td
+    v-else
+    :class="[typeof cellValue === 'number' ? 'table__id' : 'table__content']"
+  >
+    {{cellValue}}
+  </td>
 </template>
 
 <script>
@@ -10,6 +27,12 @@ export default {
       type: [String, Number],
     },
     className: {
+      type: String,
+    },
+    checkRouter: {
+      type: [Number, Boolean],
+    },
+    cellToLink: {
       type: String,
     },
   },
@@ -31,6 +54,16 @@ export default {
   .table__content {
     width: 120px;
     font-weight: bold;
+
+    span {
+      display: block;
+      width: 100%;
+
+      a {
+        display: block;
+        width: 100%;
+      }
+    }
   }
 
 </style>

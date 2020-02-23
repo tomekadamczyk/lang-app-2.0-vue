@@ -1,12 +1,13 @@
 <template>
     <table class="table">
-        <TableRow
-            v-for="(item, index) in tableDataArray"
-            v-bind:key="index"
-            v-bind:tableRow="item"
-            v-bind:index="index + 1"
-            v-bind:dataToHide="dataToHide"
-        />
+      <TableRow
+        v-for="(item, index) in tableDataArray"
+        v-bind:key="index"
+        v-bind:tableRow="item"
+        v-bind:index="index + 1"
+        v-bind:dataToHide="dataToHide"
+        v-bind:checkRouter="checkRouter"
+      />
     </table>
 </template>
 
@@ -24,6 +25,9 @@ export default {
     },
     dataToHide: {
       type: Array,
+    },
+    checkRouter: {
+      type: [Number, Boolean],
     },
   },
 };

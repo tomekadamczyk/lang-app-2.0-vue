@@ -6,6 +6,7 @@
         <VTable
             v-bind:tableDataArray="dictionary"
             v-bind:dataToHide="propsToHide"
+            v-bind:checkRouter="checkRouter"
         />
     </div>
 </template>
@@ -30,16 +31,31 @@ export default {
       store.state.defaultLanguage = $event;
       this.onUpdateDictionary(store.state.defaultLanguage);
     },
+    concatDataToHide() {
+      store.state.grammaticalCases.forEach((caseName) => {
+        this.propsToHide.push(caseName.value);
+      });
+      store.state.partsOfSpeech.forEach((partName) => {
+        this.propsToHide.push(partName.value);
+      });
+      store.state.grammaticalCases.forEach((caseName) => {
+        store.state.dictionary.forEach((row) => {
+          delete row[caseName.value];
+        });
+      });
+    },
   },
   created() {
     store.state.dictionary = [];
     store.state.defaultLanguage = store.state.languages[0].name;
     this.onUpdateDictionary(store.state.defaultLanguage);
+    this.concatDataToHide();
   },
   data() {
     return {
       sharedState: store.state,
-      propsToHide: ['noun', 'verb', 'adjective'],
+      propsToHide: [],
+      checkRouter: 1,
     };
   },
   computed: {
