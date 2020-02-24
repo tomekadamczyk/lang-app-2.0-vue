@@ -34,11 +34,13 @@ export default new Vuex.Store({
             value: 'word',
             translation: 'slowo',
             partOfSpeech: 'noun',
-            lp: {
-              nominative: 'słowo', genitive: 'słowa', dative: 'słowu', accusative: 'słowo', instrumental: 'słowie', locative: 'słowem', vocative: 'słowo!',
-            },
-            lm: {
-              nominative: 'słowa', genitive: 'słów', dative: 'słowom', accusative: 'słowa', instrumental: 'słowach', locative: 'słowami', vocative: 'słowa!',
+            wordSpecific: {
+              lp: {
+                nominative: 'słowo', genitive: 'słowa', dative: 'słowu', accusative: 'słowo', instrumental: 'słowie', locative: 'słowem', vocative: 'słowo!',
+              },
+              lm: {
+                nominative: 'słowa', genitive: 'słów', dative: 'słowom', accusative: 'słowa', instrumental: 'słowach', locative: 'słowami', vocative: 'słowa!',
+              },
             },
           },
           {
@@ -46,11 +48,13 @@ export default new Vuex.Store({
             value: 'tramwaj',
             translation: 'tramvaj',
             partOfSpeech: 'noun',
-            lp: {
-              nominative: 'tramwaj', genitive: 'tramwaju', dative: 'tramwajowi', accusative: 'tramwaj', instrumental: 'tramwaju', locative: 'tramwajem', vocative: 'tramwaju!',
-            },
-            lm: {
-              nominative: 'tramwaje', genitive: 'tramwajów', dative: 'tramwajom', accusative: 'tramwaje', instrumental: 'tramwajach', locative: 'tramwajami', vocative: 'tramwaje!',
+            wordSpecific: {
+              lp: {
+                nominative: 'tramwaj', genitive: 'tramwaju', dative: 'tramwajowi', accusative: 'tramwaj', instrumental: 'tramwaju', locative: 'tramwajem', vocative: 'tramwaju!',
+              },
+              lm: {
+                nominative: 'tramwaje', genitive: 'tramwajów', dative: 'tramwajom', accusative: 'tramwaje', instrumental: 'tramwajach', locative: 'tramwajami', vocative: 'tramwaje!',
+              },
             },
           },
           {
@@ -58,8 +62,10 @@ export default new Vuex.Store({
             value: 'spodnie',
             translation: 'kalhoty',
             partOfSpeech: 'noun',
-            lp: {
-              nominative: 'spodnie', genitive: 'spodni', dative: 'spodniom', accusative: 'spodnie', instrumental: 'spodniach', locative: 'spodniami', vocative: 'spodnie!',
+            wordSpecific: {
+              lp: {
+                nominative: 'spodnie', genitive: 'spodni', dative: 'spodniom', accusative: 'spodnie', instrumental: 'spodniach', locative: 'spodniami', vocative: 'spodnie!',
+              },
             },
           },
           {
@@ -67,11 +73,13 @@ export default new Vuex.Store({
             value: 'kurtka',
             translation: 'bunda',
             partOfSpeech: 'noun',
-            lp: {
-              nominative: 'kurtka', genitive: 'kurtki', dative: 'kurtce', accusative: 'kurtkę', instrumental: 'kurtce', locative: 'kurtką', vocative: 'kurtko!',
-            },
-            lm: {
-              nominative: 'kurtki', genitive: 'kurtek', dative: 'kurtom', accusative: 'kurtki', instrumental: 'kurtkami', locative: 'kurtkom', vocative: 'kurtki!',
+            wordSpecific: {
+              lp: {
+                nominative: 'kurtka', genitive: 'kurtki', dative: 'kurtce', accusative: 'kurtkę', instrumental: 'kurtce', locative: 'kurtką', vocative: 'kurtko!',
+              },
+              lm: {
+                nominative: 'kurtki', genitive: 'kurtek', dative: 'kurtom', accusative: 'kurtki', instrumental: 'kurtkami', locative: 'kurtkom', vocative: 'kurtki!',
+              },
             },
           },
           {
@@ -79,11 +87,13 @@ export default new Vuex.Store({
             value: 'góra',
             translation: 'hora',
             partOfSpeech: 'noun',
-            lp: {
-              nominative: 'góra', genitive: 'góry', dative: 'górze', accusative: 'górę', instrumental: 'górze', locative: 'górą', vocative: 'góro!',
-            },
-            lm: {
-              nominative: 'góry', genitive: 'gór', dative: 'górom', accusative: 'góry', instrumental: 'górach', locative: 'górami', vocative: 'góry!',
+            wordSpecific: {
+              lp: {
+                nominative: 'góra', genitive: 'góry', dative: 'górze', accusative: 'górę', instrumental: 'górze', locative: 'górą', vocative: 'góro!',
+              },
+              lm: {
+                nominative: 'góry', genitive: 'gór', dative: 'górom', accusative: 'góry', instrumental: 'górach', locative: 'górami', vocative: 'góry!',
+              },
             },
           },
         ],

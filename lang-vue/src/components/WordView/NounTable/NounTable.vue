@@ -39,12 +39,22 @@ export default {
       const arrayOfDictionaryObjects = [];
       Object.keys(this.selectedCard).forEach((item) => {
         Object.keys(this.selectedCard[item]).forEach((key) => {
-          if (this.grammaticalCasesArray.includes(key) && item === counting) {
-            newDictionaryObjects[item] = {
-              case: key,
-              value: this.selectedCard[item][key],
-            };
-            arrayOfDictionaryObjects.push(newDictionaryObjects[item]);
+          const checkNumber = Number(key);
+
+          if (isNaN(checkNumber)) {
+            const singularGrammarCasesObject = this.selectedCard[item].lp;
+
+            if (singularGrammarCasesObject !== undefined) {
+              Object.keys(singularGrammarCasesObject).forEach((caseName) => {
+                if (this.grammaticalCasesArray.includes(caseName) && key === counting) {
+                  newDictionaryObjects[item] = {
+                    case: caseName,
+                    value: singularGrammarCasesObject[caseName],
+                  };
+                  arrayOfDictionaryObjects.push(newDictionaryObjects[item]);
+                }
+              });
+            }
           }
         });
       });
