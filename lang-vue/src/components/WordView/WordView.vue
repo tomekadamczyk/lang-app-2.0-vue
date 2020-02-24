@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="word__name"><strong>{{ wordName }}</strong> - {{ wordTranslation }}</div>
+        <h1 class="word__name"><strong>{{ wordName }}</strong> - {{ wordTranslation }}</h1>
         <div class="tables">
           <NounTable
             v-bind:counting="singular"
@@ -82,6 +82,13 @@ export default {
       width: auto;
       display: inline-block;
       margin-right: 100px;
+    }
+  }
+
+  .word__name {
+
+    strong {
+      text-transform: capitalize;
     }
   }
 </style>

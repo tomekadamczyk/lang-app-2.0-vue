@@ -1,6 +1,5 @@
 <template>
-  <div class="about">
-    <h1>Word</h1>
+  <div class="wordView">
     <WordView />
   </div>
 </template>
