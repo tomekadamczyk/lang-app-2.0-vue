@@ -1,16 +1,18 @@
 <template>
     <div>
         <div class="word__name"><strong>{{ wordName }}</strong> - {{ wordTranslation }}</div>
-        <NounTable
-          v-bind:counting="singular"
-          v-bind:selectedCard="selectedCard"
-          v-bind:grammaticalCasesArray="grammaticalCasesArray"
-        />
-        <NounTable
-          v-bind:counting="plural"
-          v-bind:selectedCard="selectedCard"
-          v-bind:grammaticalCasesArray="grammaticalCasesArray"
-        />
+        <div class="tables">
+          <NounTable
+            v-bind:counting="singular"
+            v-bind:selectedCard="selectedCard"
+            v-bind:grammaticalCasesArray="grammaticalCasesArray"
+          />
+          <NounTable
+            v-bind:counting="plural"
+            v-bind:selectedCard="selectedCard"
+            v-bind:grammaticalCasesArray="grammaticalCasesArray"
+          />
+        </div>
     </div>
 </template>
 
@@ -72,6 +74,14 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+  .tables {
+    width: 100%;
 
+    .table {
+      width: auto;
+      display: inline-block;
+      margin-right: 100px;
+    }
+  }
 </style>

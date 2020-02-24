@@ -1,11 +1,10 @@
 <template>
-    <div style="width: 400px;">
-        <VTable
-            v-bind:tableDataArray="preparedData"
-            v-bind:dataToHide="propsToHide"
-            v-bind:checkRouter="checkRouter"
-        />
-    </div>
+    <VTable
+        v-bind:tableDataArray="preparedData"
+        v-bind:dataToHide="propsToHide"
+        v-bind:checkRouter="checkRouter"
+        class="table"
+    />
 </template>
 
 <script>
