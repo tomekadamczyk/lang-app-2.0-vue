@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     getWordId() {
-      this.wordId = this.$route.params.wordId;
+      this.wordId = Number(this.$route.params.wordId);
     },
     generateWordData() {
       Object.keys(this.grammaticalCases).forEach((caseData) => {
@@ -59,7 +59,7 @@ export default {
     this.getWordId();
     store.state.languages[0].cards.forEach((card) => {
       Object.keys(card).forEach((cardData) => {
-        if (card[cardData] === Number(this.wordId)) {
+        if (card[cardData] === this.wordId) {
           this.selectedCard = card;
         }
       });
