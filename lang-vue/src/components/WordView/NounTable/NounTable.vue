@@ -35,11 +35,6 @@ export default {
     };
   },
   methods: {
-    concatDataToHide() {
-      store.state.partsOfSpeech.forEach((_, index) => {
-        this.propsToHide.push(index + 1);
-      });
-    },
     createWordCases(counting) {
       const newDictionaryObjects = {};
       const arrayOfDictionaryObjects = [];
