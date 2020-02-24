@@ -34,7 +34,6 @@ export default new Vuex.Store({
             value: 'word',
             translation: 'slowo',
             partOfSpeech: 'noun',
-            grammaticalCase: 'nominative',
             lp: {
               nominative: 'słowo', genitive: 'słowa', dative: 'słowu', accusative: 'słowo', instrumental: 'słowie', locative: 'słowem', vocative: 'słowo!',
             },
@@ -47,7 +46,6 @@ export default new Vuex.Store({
             value: 'tramwaj',
             translation: 'tramvaj',
             partOfSpeech: 'noun',
-            grammaticalCase: 'nominative',
             lp: {
               nominative: 'tramwaj', genitive: 'tramwaju', dative: 'tramwajowi', accusative: 'tramwaj', instrumental: 'tramwaju', locative: 'tramwajem', vocative: 'tramwaju!',
             },
@@ -60,7 +58,6 @@ export default new Vuex.Store({
             value: 'spodnie',
             translation: 'kalhoty',
             partOfSpeech: 'noun',
-            grammaticalCase: 'nominative',
             lp: {
               nominative: 'spodnie', genitive: 'spodni', dative: 'spodniom', accusative: 'spodnie', instrumental: 'spodniach', locative: 'spodniami', vocative: 'spodnie!',
             },
@@ -70,7 +67,6 @@ export default new Vuex.Store({
             value: 'kurtka',
             translation: 'bunda',
             partOfSpeech: 'noun',
-            grammaticalCase: 'nominative',
             lp: {
               nominative: 'kurtka', genitive: 'kurtki', dative: 'kurtce', accusative: 'kurtkę', instrumental: 'kurtce', locative: 'kurtką', vocative: 'kurtko!',
             },
@@ -83,7 +79,6 @@ export default new Vuex.Store({
             value: 'góra',
             translation: 'hora',
             partOfSpeech: 'noun',
-            grammaticalCase: 'nominative',
             lp: {
               nominative: 'góra', genitive: 'góry', dative: 'górze', accusative: 'górę', instrumental: 'górze', locative: 'górą', vocative: 'góro!',
             },
