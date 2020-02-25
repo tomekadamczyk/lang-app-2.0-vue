@@ -92,7 +92,6 @@ export default {
       });
     });
     this.generateWordData();
-    console.log(this.selectedCard.partOfSpeech)
   },
   computed: {
     grammaticalCases() {
