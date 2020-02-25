@@ -1,7 +1,10 @@
 <template>
     <div>
         <h1 class="word__name"><strong>{{ wordName }}</strong> - {{ wordTranslation }}</h1>
-        <div class="tables">
+        <div
+          class="tables"
+          v-if="selectedCard.partOfSpeech === 'noun'"
+        >
           <NounTable
             v-bind:counting="singular"
             v-bind:selectedCard="selectedCard"
@@ -13,17 +16,36 @@
             v-bind:grammaticalCasesArray="grammaticalCasesArray"
           />
         </div>
+        <div
+          class="tables"
+          v-if="selectedCard.partOfSpeech === 'verb'"
+        >
+          <VerbTable
+            v-bind:selectedCard="selectedCard"
+            v-bind:time="time.present"
+          />
+          <VerbTable
+            v-bind:selectedCard="selectedCard"
+            v-bind:time="time.past"
+          />
+          <VerbTable
+            v-bind:selectedCard="selectedCard"
+            v-bind:time="time.future"
+          />
+        </div>
     </div>
 </template>
 
 <script>
 import NounTable from './NounTable/NounTable.vue';
+import VerbTable from './VerbTable/VerbTable.vue';
 import store from '../../store';
 
 export default {
   name: 'WordView',
   components: {
     NounTable,
+    VerbTable,
   },
   data() {
     return {
@@ -35,6 +57,11 @@ export default {
       wordId: null,
       grammaticalCasesArray: [],
       sharedState: store.state,
+      time: {
+        present: 'present',
+        past: 'past',
+        future: 'future',
+      },
     };
   },
   methods: {
@@ -65,6 +92,7 @@ export default {
       });
     });
     this.generateWordData();
+    console.log(this.selectedCard.partOfSpeech)
   },
   computed: {
     grammaticalCases() {
@@ -82,6 +110,7 @@ export default {
       width: auto;
       display: inline-block;
       margin-right: 100px;
+      vertical-align: top;
     }
   }
 
