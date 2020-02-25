@@ -11,7 +11,7 @@
 import VTable from '../../UI/Table/VTable.vue';
 
 export default {
-  name: 'WordView',
+  name: 'NounTable',
   components: {
     VTable,
   },
@@ -41,12 +41,12 @@ export default {
         Object.keys(this.selectedCard[item]).forEach((key) => {
           const checkNumber = Number(key);
 
-          if (isNaN(checkNumber)) {
-            const singularGrammarCasesObject = this.selectedCard[item].lp;
-
+          if (isNaN(checkNumber) && key === counting) {
+            const singularGrammarCasesObject = this.selectedCard[item][counting];
+            
             if (singularGrammarCasesObject !== undefined) {
               Object.keys(singularGrammarCasesObject).forEach((caseName) => {
-                if (this.grammaticalCasesArray.includes(caseName) && key === counting) {
+                if (this.grammaticalCasesArray.includes(caseName)) {
                   newDictionaryObjects[item] = {
                     case: caseName,
                     value: singularGrammarCasesObject[caseName],
