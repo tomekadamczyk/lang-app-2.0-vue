@@ -96,6 +96,38 @@ export default new Vuex.Store({
               },
             },
           },
+          {
+            id: 5,
+            value: 'robić',
+            translation: 'dělat',
+            partOfSpeech: 'verb',
+            wordSpecific: {
+              present: {
+                i: 'dělam',
+                youSingular: 'dělaš',
+                he: 'děla',
+                we: 'dělame',
+                youPlural: 'dělate',
+                they: 'dělaji',
+              },
+              past: {
+                i: 'dělal',
+                youSingular: 'dělal',
+                he: 'dělal',
+                we: 'dělali/dělaly jsme',
+                youPlural: 'dělali/dělaly jste',
+                they: 'dělali/dělaly/dělala',
+              },
+              future: {
+                i: 'budu dělat',
+                youSingular: 'budeš dělat',
+                he: 'bude dělat',
+                we: 'budeme dělat',
+                youPlural: 'budete dělat',
+                they: 'budou dělat',
+              },
+            },
+          },
         ],
       },
       {
