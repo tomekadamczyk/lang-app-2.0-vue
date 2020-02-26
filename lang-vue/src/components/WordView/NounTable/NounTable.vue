@@ -41,9 +41,10 @@ export default {
         Object.keys(this.selectedCard[item]).forEach((key) => {
           const checkNumber = Number(key);
 
+          // eslint-disable-next-line no-restricted-globals
           if (isNaN(checkNumber) && key === counting) {
             const singularGrammarCasesObject = this.selectedCard[item][counting];
-            
+
             if (singularGrammarCasesObject !== undefined) {
               Object.keys(singularGrammarCasesObject).forEach((caseName) => {
                 if (this.grammaticalCasesArray.includes(caseName)) {
