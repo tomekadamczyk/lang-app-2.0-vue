@@ -128,6 +128,60 @@ export default new Vuex.Store({
               },
             },
           },
+          {
+            id: 6,
+            value: 'velký',
+            translation: 'duży',
+            partOfSpeech: 'adjective',
+            wordSpecific: {
+              lp: {
+                nominative: {
+                  masculine: 'velký', feminine: 'velká', neuter: 'velké',
+                },
+                genitive: {
+                  masculine: 'velkého', feminine: 'velké', neuter: 'velkého',
+                },
+                dative: {
+                  masculine: 'velkému', feminine: 'velké', neuter: 'velkému',
+                },
+                accusative: {
+                  masculine: 'velkého', feminine: 'velkou', neuter: 'velké',
+                },
+                instrumental: {
+                  masculine: 'velkým', feminine: 'velkou', neuter: 'velkým',
+                },
+                locative: {
+                  masculine: 'velkém', feminine: 'velké', neuter: 'velkém',
+                },
+                vocative: {
+                  masculine: 'velký', feminine: 'velká', neuter: 'velké',
+                },
+              },
+              lm: {
+                nominative: {
+                  masculine: 'velcí', feminine: 'velké', neuter: 'velká',
+                },
+                genitive: {
+                  masculine: 'velkých', feminine: 'velkých', neuter: 'velkých',
+                },
+                dative: {
+                  masculine: 'velkým', feminine: 'velkým', neuter: 'velkým',
+                },
+                accusative: {
+                  masculine: 'velké', feminine: 'velké', neuter: 'velké',
+                },
+                instrumental: {
+                  masculine: 'velkými', feminine: 'velkými', neuter: 'velkými',
+                },
+                locative: {
+                  masculine: 'velkých', feminine: 'velkých', neuter: 'velkých',
+                },
+                vocative: {
+                  masculine: 'velcí', feminine: 'velké', neuter: 'velká',
+                },
+              },
+            },
+          },
         ],
       },
       {
