@@ -33,12 +33,28 @@
             v-bind:time="time.future"
           />
         </div>
+        <div
+          class="tables"
+          v-if="selectedCard.partOfSpeech === 'adjective'"
+        >
+          <AdjectiveTable
+            v-bind:selectedCard="selectedCard"
+            v-bind:grammaticalCasesArray="grammaticalCasesArray"
+            v-bind:counting="singular"
+          />
+          <AdjectiveTable
+            v-bind:selectedCard="selectedCard"
+            v-bind:grammaticalCasesArray="grammaticalCasesArray"
+            v-bind:counting="plural"
+          />
+        </div>
     </div>
 </template>
 
 <script>
 import NounTable from './NounTable/NounTable.vue';
 import VerbTable from './VerbTable/VerbTable.vue';
+import AdjectiveTable from './AdjectiveTable/AdjectiveTable.vue';
 import store from '../../store';
 
 export default {
@@ -46,6 +62,7 @@ export default {
   components: {
     NounTable,
     VerbTable,
+    AdjectiveTable,
   },
   data() {
     return {
