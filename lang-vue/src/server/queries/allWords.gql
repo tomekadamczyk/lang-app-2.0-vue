@@ -1,0 +1,11 @@
+query allWords {
+    words {
+        id,
+        value,
+        translation,
+        partofspeechId {
+            value
+        },
+        wordSpecific,
+    }
+}
