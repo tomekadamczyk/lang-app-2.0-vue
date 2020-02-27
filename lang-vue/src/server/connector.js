@@ -18,7 +18,7 @@ db.authenticate()
     console.error('Unable to connect:', err);
   });
 
-const WordType = db.define('word', {
+const WordModel = db.define('word', {
   id: {
     type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true, field: 'id_word',
   },
@@ -30,7 +30,7 @@ const WordType = db.define('word', {
   closedAt: { type: Sequelize.DATE, field: 'closedAt' },
 });
 
-const PartOfSpeechType = db.define('partofspeech', {
+const PartOfSpeechModel = db.define('partofspeech', {
   id: {
     type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true, field: 'id_partofspeech',
   },
@@ -40,7 +40,7 @@ const PartOfSpeechType = db.define('partofspeech', {
   closedAt: { type: Sequelize.DATE, field: 'closedAt' },
 });
 
-const GrammaticalCaseType = db.define('grammaticalcase', {
+const GrammaticalCaseModel = db.define('grammaticalcase', {
   id: {
     type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true, field: 'id_grammaticalcase',
   },
@@ -50,16 +50,40 @@ const GrammaticalCaseType = db.define('grammaticalcase', {
   closedAt: { type: Sequelize.DATE, field: 'closedAt' },
 });
 
-WordType.belongsTo(PartOfSpeechType);
-PartOfSpeechType.hasMany(WordType);
-WordType.belongsTo(GrammaticalCaseType);
-GrammaticalCaseType.hasMany(WordType);
+WordModel.belongsTo(PartOfSpeechModel);
+PartOfSpeechModel.hasMany(WordModel);
+WordModel.belongsTo(GrammaticalCaseModel);
+GrammaticalCaseModel.hasMany(WordModel);
 
 const Word = db.models.word;
 const PartOfSpeech = db.models.partofspeech;
 const GrammaticalCase = db.models.grammaticalcase;
 
 db.sync().then(() => {
+  PartOfSpeech.create({
+    id: 1,
+    value: 'noun',
+  }),
+  PartOfSpeech.create({
+    id: 2,
+    value: 'verb',
+  }),
+  PartOfSpeech.create({
+    id: 3,
+    value: 'adjective',
+  }),
+  GrammaticalCase.create({
+    id: 1,
+    value: 'nominative',
+  }),
+  GrammaticalCase.create({
+    id: 2,
+    value: 'genitive',
+  }),
+  GrammaticalCase.create({
+    id: 3,
+    value: 'dative',
+  }),
   Word.create({
     id: 1,
     value: 'Kurtka',
@@ -75,14 +99,7 @@ db.sync().then(() => {
         vocative: 'kurtko!',
       },
     },
-  }),
-  PartOfSpeech.create({
-    id: 1,
-    value: 'noun',
-  }),
-  GrammaticalCase.create({
-    id: 1,
-    value: 'nominative',
+    grammaticalcase: 1,
   })
 });
 
