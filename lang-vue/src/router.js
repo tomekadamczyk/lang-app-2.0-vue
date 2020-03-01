@@ -5,6 +5,7 @@ import Flashcards from './views/Flashcards.vue';
 import Hangman from './views/Hangman.vue';
 import Dictionary from './views/Dictionary.vue';
 import WordView from './views/WordView.vue';
+import AddWord from './components/WordView/addWord.vue';
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/dictionary',
       name: 'dictionary',
       component: Dictionary,
+    },
+    {
+      path: '/dictionary/add',
+      name: 'adddWord',
+      component: AddWord,
     },
     {
       path: '/dictionary/:wordId',
