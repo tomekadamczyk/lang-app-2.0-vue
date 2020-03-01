@@ -5,7 +5,7 @@ import Flashcards from './views/Flashcards.vue';
 import Hangman from './views/Hangman.vue';
 import Dictionary from './views/Dictionary.vue';
 import WordView from './views/WordView.vue';
-import AddWord from './components/WordView/addWord.vue';
+import AddWord from './components/AddWord/AddWord.vue';
 
 Vue.use(Router);
 
