@@ -72,7 +72,7 @@ const rootQuery = new GraphQLObjectType({
         return Word.findByPk(args.id);
       },
     },
-    partsOfSpeech: {
+    allPartsOfSpeech: {
       type: new GraphQLList(PartOfSpeechType),
       resolve(obj, args) {
         return PartOfSpeech.findAll({ where: args });
