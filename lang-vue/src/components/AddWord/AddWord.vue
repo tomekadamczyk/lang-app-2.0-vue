@@ -36,63 +36,19 @@
           <transition name="fade">
             <div v-if="partofspeechId === 1" class="times">
               <div class="inputs-set">
-                <div class="form-input-group">
-                  <label for="nominative">nominative</label>
-                  <input id="nominative" v-model="nounCases.lp.nominative" />
-                </div>
-                <div class="form-input-group">
-                  <label for="genitive">genitive</label>
-                  <input id="genitive" v-model="nounCases.lp.genitive" />
-                </div>
-                <div class="form-input-group">
-                  <label for="accusative">accusative</label>
-                  <input id="accusative" v-model="nounCases.lp.accusative" />
-                </div>
-                <div class="form-input-group">
-                  <label for="dative">dative</label>
-                  <input id="dative" v-model="nounCases.lp.dative" />
-                </div>
-                <div class="form-input-group">
-                  <label for="locative">locative</label>
-                  <input id="locative" v-model="nounCases.lp.locative" />
-                </div>
-                <div class="form-input-group">
-                  <label for="instrumental">instrumental</label>
-                  <input id="instrumental" v-model="nounCases.lp.instrumental" />
-                </div>
-                <div class="form-input-group">
-                  <label for="vocative">vocative</label>
-                  <input id="vocative" v-model="nounCases.lp.vocative" />
+                <div v-for="(value, index) in grammaticalCases" v-bind:key="index">
+                  <div class="form-input-group">
+                    <label for="nominative">{{ value.value }}</label>
+                    <input id="nominative" v-model="nounCases.lp[value.value]" />
+                  </div>
                 </div>
               </div>
               <div class="inputs-set">
-                <div class="form-input-group">
-                  <label for="nominative">nominative</label>
-                  <input id="nominative" v-model="nounCases.lm.nominative" />
-                </div>
-                <div class="form-input-group">
-                  <label for="genitive">genitive</label>
-                  <input id="genitive" v-model="nounCases.lm.genitive" />
-                </div>
-                <div class="form-input-group">
-                  <label for="accusative">accusative</label>
-                  <input id="accusative" v-model="nounCases.lm.accusative" />
-                </div>
-                <div class="form-input-group">
-                  <label for="dative">dative</label>
-                  <input id="dative" v-model="nounCases.lm.dative" />
-                </div>
-                <div class="form-input-group">
-                  <label for="locative">locative</label>
-                  <input id="locative" v-model="nounCases.lm.locative" />
-                </div>
-                <div class="form-input-group">
-                  <label for="instrumental">instrumental</label>
-                  <input id="instrumental" v-model="nounCases.lm.instrumental" />
-                </div>
-                <div class="form-input-group">
-                  <label for="vocative">vocative</label>
-                  <input id="vocative" v-model="nounCases.lm.vocative" />
+                <div v-for="(value, index) in grammaticalCases" v-bind:key="index">
+                  <div class="form-input-group">
+                    <label for="nominative">{{ value.value }}</label>
+                    <input id="nominative" v-model="nounCases.lm[value.value]" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -119,6 +75,12 @@ export default {
       query allPartsOfSpeech {
       allPartsOfSpeech {
         id,
+        value
+      }
+    }`,
+    grammaticalCases: gql`
+      query getGrammaticalCases {
+      grammaticalCases {
         value
       }
     }`,
