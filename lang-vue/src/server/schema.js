@@ -8,7 +8,9 @@ const {
   GraphQLNonNull,
 } = require('graphql');
 const { GraphQLJSON } = require('graphql-type-json');
-const { Word, PartOfSpeech, GrammaticalCase } = require('./connector.js');
+const {
+  Word, PartOfSpeech, GrammaticalCase, TimePerson,
+} = require('./connector.js');
 
 
 const PartOfSpeechType = new GraphQLObjectType({
@@ -21,6 +23,14 @@ const PartOfSpeechType = new GraphQLObjectType({
 
 const GrammaticalCaseType = new GraphQLObjectType({
   name: 'GrammaticalCase',
+  fields: () => ({
+    id: { type: GraphQLInt },
+    value: { type: GraphQLString },
+  }),
+});
+
+const TimePersonType = new GraphQLObjectType({
+  name: 'TimePerson',
   fields: () => ({
     id: { type: GraphQLInt },
     value: { type: GraphQLString },
@@ -76,6 +86,12 @@ const rootQuery = new GraphQLObjectType({
       type: new GraphQLList(PartOfSpeechType),
       resolve(obj, args) {
         return PartOfSpeech.findAll({ where: args });
+      },
+    },
+    allTimePersons: {
+      type: new GraphQLList(TimePersonType),
+      resolve(obj, args) {
+        return TimePerson.findAll({ where: args });
       },
     },
     partOfSpeech: {
