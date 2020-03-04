@@ -22,40 +22,93 @@
           <div class="form-input-group">
             <label for="new-word">Type new word</label>
             <input
-            id="new-word"
-            v-model="newWord" />
+              id="new-word"
+              v-model="newWord"
+            />
           </div>
           <div class="form-input-group">
             <label for="new-word-translation">Type translation</label>
             <input
-            id="new-word-translation"
-            v-model="translation" />
+              id="new-word-translation"
+              v-model="translation"
+            />
           </div>
         </div>
         <div class="add-form-column">
-          <transition name="fade">
             <div v-if="partofspeechId === 1" class="times">
+              <div class="inputs-heading">L.p</div>
               <div class="inputs-set">
-                <div v-for="(value, index) in grammaticalCases" v-bind:key="index">
-                  <div class="form-input-group">
-                    <label for="nominative">{{ value.value }}</label>
-                    <input id="nominative" v-model="nounCases.lp[value.value]" />
-                  </div>
+                <div
+                  v-for="(value, index) in grammaticalCases"
+                  v-bind:key="index"
+                  class="form-input-group"
+                >
+                  <label for="nominative">{{ value.value }}</label>
+                  <input
+                    id="nominative"
+                    v-model="nounCases.lp[value.value]"
+                  />
                 </div>
               </div>
+              <div class="inputs-heading">L.m</div>
               <div class="inputs-set">
-                <div v-for="(value, index) in grammaticalCases" v-bind:key="index">
-                  <div class="form-input-group">
-                    <label for="nominative">{{ value.value }}</label>
-                    <input id="nominative" v-model="nounCases.lm[value.value]" />
-                  </div>
+                <div
+                  v-for="(value, index) in grammaticalCases"
+                  v-bind:key="index"
+                  class="form-input-group"
+                >
+                  <label for="nominative">{{ value.value }}</label>
+                  <input
+                    id="nominative"
+                    v-model="nounCases.lm[value.value]"
+                  />
                 </div>
               </div>
             </div>
-          </transition>
-          <div v-if="partofspeechId === 2">
-            verb
-          </div>
+            <div v-if="partofspeechId === 2" class="times">
+              <div class="inputs-heading">Present</div>
+              <div class="inputs-set">
+                <div
+                  v-for="(value, index) in allTimePersons"
+                  v-bind:key="index"
+                  class="form-input-group"
+                >
+                  <label for="nominative">{{ replacePersonTimeLabel(value.value) }}</label>
+                  <input
+                    id="nominative"
+                    v-model="verbPerson.present[value.value]"
+                  />
+                </div>
+              </div>
+              <div class="inputs-heading">Past</div>
+              <div class="inputs-set">
+                <div
+                  v-for="(value, index) in allTimePersons"
+                  v-bind:key="index"
+                  class="form-input-group"
+                >
+                  <label for="nominative">{{ replacePersonTimeLabel(value.value) }}</label>
+                  <input
+                    id="nominative"
+                    v-model="verbPerson.past[value.value]"
+                  />
+                </div>
+              </div>
+              <div class="inputs-heading">Future</div>
+              <div class="inputs-set">
+                <div
+                  v-for="(value, index) in allTimePersons"
+                  v-bind:key="index"
+                  class="form-input-group"
+                >
+                  <label for="nominative">{{ replacePersonTimeLabel(value.value) }}</label>
+                  <input
+                    id="nominative"
+                    v-model="verbPerson.future[value.value]"
+                  />
+                </div>
+              </div>
+            </div>
           <div v-if="partofspeechId === 3">
             adjective
           </div>
@@ -81,6 +134,12 @@ export default {
     grammaticalCases: gql`
       query getGrammaticalCases {
       grammaticalCases {
+        value
+      }
+    }`,
+    allTimePersons: gql`
+      query allTimePersons {
+      allTimePersons {
         value
       }
     }`,
@@ -111,6 +170,32 @@ export default {
           vocative: '',
         },
       },
+      verbPerson: {
+        present: {
+          i: '',
+          youSingular: '',
+          he: '',
+          we: '',
+          youPlural: '',
+          they: '',
+        },
+        past: {
+          i: '',
+          youSingular: '',
+          he: '',
+          we: '',
+          youPlural: '',
+          they: '',
+        },
+        future: {
+          i: '',
+          youSingular: '',
+          he: '',
+          we: '',
+          youPlural: '',
+          they: '',
+        },
+      },
     };
   },
   methods: {
@@ -137,6 +222,43 @@ export default {
         },
       });
     },
+    replacePersonTimeLabel(label) {
+      switch (label) {
+        case 'singularFirst':
+          // eslint-disable-next-line no-param-reassign
+          label = 'I';
+          break;
+
+        case 'singularSecond':
+          // eslint-disable-next-line no-param-reassign
+          label = 'You';
+          break;
+
+        case 'singularThird':
+          // eslint-disable-next-line no-param-reassign
+          label = 'He/She/It';
+          break;
+
+        case 'pluralFirst':
+          // eslint-disable-next-line no-param-reassign
+          label = 'We';
+          break;
+
+        case 'pluralSecond':
+          // eslint-disable-next-line no-param-reassign
+          label = 'You';
+          break;
+
+        case 'pluralThird':
+          // eslint-disable-next-line no-param-reassign
+          label = 'They';
+          break;
+
+        default:
+          return null;
+      }
+      return label;
+    },
   },
 };
 </script>
@@ -157,22 +279,33 @@ export default {
   }
 
   .add-form-column {
-    margin-right: 50px;
+
+    &:first-of-type {
+      max-width: 200px;
+      flex: 0 0 200px;
+    }
+
+    &:nth-of-type(2) {
+      max-width: calc(100% - 200px);
+      flex: 0 0 calc(100% - 200px);
+    }
 
     .times {
       display: flex;
-      position: relative;
-      transform: translateX(50px);
+      flex-direction: column;
     }
   }
 
   .form-input-group {
     margin-bottom: 15px;
+    margin-right: 10px;
 
     label {
       display: block;
       font-size: 12px;
       margin-bottom: 5px;
+      color: #aaa;
+      font-weight: bold;
     }
 
     input {
@@ -182,13 +315,15 @@ export default {
   }
 
   .inputs-set {
-    margin-right: 20px;
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    flex-wrap: wrap;
   }
 
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
+  .inputs-heading {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
   }
 </style>
