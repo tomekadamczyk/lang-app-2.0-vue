@@ -19,20 +19,20 @@
       </div>
       <form class="add-word-form">
         <div class="add-form-column">
-          <div class="form-input-group">
-            <label for="new-word">Type new word</label>
-            <input
-              id="new-word"
-              v-model="newWord"
-            />
-          </div>
-          <div class="form-input-group">
-            <label for="new-word-translation">Type translation</label>
-            <input
-              id="new-word-translation"
-              v-model="translation"
-            />
-          </div>
+          <InputGroup
+            v-bind:id="`new-word`"
+            v-bind:model="newWord"
+            v-on:input="newWord = $event"
+          >
+            Type new word
+          </InputGroup>
+          <InputGroup
+            v-bind:id="`new-word-translation`"
+            v-bind:model="translation"
+            v-on:input="translation = $event"
+          >
+            Type translation
+          </InputGroup>
         </div>
         <div class="add-form-column">
             <div v-if="partofspeechId === 1" class="times">
@@ -109,8 +109,52 @@
                 </div>
               </div>
             </div>
-          <div v-if="partofspeechId === 3">
-            adjective
+          <div v-if="partofspeechId === 3" class="form-container">
+            <div class="form-container-data">
+              <div
+                v-for="(singleCase, index) in grammaticalCases"
+                v-bind:key="index"
+                class="grammaticalCases"
+              >
+              <div class="inputs-heading">{{ singleCase.value }}</div>
+                  <div class="inputs-set">
+                <div
+                  v-for="(sexType, index) in allSexTypes"
+                  v-bind:key="index"
+                  class="form-input-group"
+                >
+                  <label for="nominative">{{ sexType.value }}</label>
+                    <input
+                      id="nominative"
+                      v-model="adj.lp[singleCase.value][sexType.value]"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-container-data">
+              <div
+                v-for="(singleCase, index) in grammaticalCases"
+                v-bind:key="index"
+                class="grammaticalCases"
+              >
+              <div class="inputs-heading">{{ singleCase.value }}</div>
+                  <div class="inputs-set">
+                <div
+                  v-for="(sexType, index) in allSexTypes"
+                  v-bind:key="index"
+                  class="form-input-group"
+                >
+                  <label for="nominative">{{ sexType.value }}</label>
+                    <input
+                      id="nominative"
+                      v-model="adj.lm[singleCase.value][sexType.value]"
+                    />
+                    {{adj.lm[singleCase.value][sexType.value]}}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </form>
@@ -120,9 +164,13 @@
 
 <script>
 import gql from 'graphql-tag';
+import InputGroup from '../UI/Form/Input/InputGroup.vue';
 
 export default {
   name: 'Add',
+  components: {
+    InputGroup,
+  },
   apollo: {
     allPartsOfSpeech: gql`
       query allPartsOfSpeech {
@@ -143,6 +191,13 @@ export default {
         value
       }
     }`,
+    allSexTypes: gql`
+      query allSexTypes {
+      allSexTypes {
+        value
+      }
+    }
+    `,
   },
   data() {
     return {
@@ -172,35 +227,127 @@ export default {
       },
       verbPerson: {
         present: {
-          i: '',
-          youSingular: '',
-          he: '',
-          we: '',
-          youPlural: '',
-          they: '',
+          singularFirst: '',
+          singularSecond: '',
+          singularThird: '',
+          pluralFirst: '',
+          pluralSecond: '',
+          pluralThird: '',
         },
         past: {
-          i: '',
-          youSingular: '',
-          he: '',
-          we: '',
-          youPlural: '',
-          they: '',
+          singularFirst: '',
+          singularSecond: '',
+          singularThird: '',
+          pluralFirst: '',
+          pluralSecond: '',
+          pluralThird: '',
         },
         future: {
-          i: '',
-          youSingular: '',
-          he: '',
-          we: '',
-          youPlural: '',
-          they: '',
+          singularFirst: '',
+          singularSecond: '',
+          singularThird: '',
+          pluralFirst: '',
+          pluralSecond: '',
+          pluralThird: '',
+        },
+      },
+      adj: {
+        lp: {
+          nominative: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          genitive: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          accusative: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          dative: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          locative: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          instrumental: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          vocative: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+        },
+        lm: {
+          nominative: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          genitive: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          accusative: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          dative: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          locative: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          instrumental: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
+          vocative: {
+            masculine: '',
+            feminine: '',
+            neuter: '',
+          },
         },
       },
     };
   },
+  computed: {
+    getCases() {
+      return this.grammaticalCases;
+    },
+    getSexTypes() {
+      return this.allSexTypes;
+    },
+  },
   methods: {
     addWord() {
-      this.wordSpecific = this.nounCases;
+      if (this.partofspeechId === 1) {
+        this.wordSpecific = this.nounCases;
+      }
+      if (this.partofspeechId === 2) {
+        this.wordSpecific = this.verbPerson;
+      }
+      if (this.partofspeechId === 3) {
+        this.wordSpecific = this.adj;
+      }
       this.$apollo.mutate({
         mutation: gql`
           mutation addWord ($value: String!, $translation: String!, $wordSpecific: JSON, $partofspeechId: Int!) {
@@ -265,13 +412,13 @@ export default {
 
 <style lang="scss" scoped>
   .addcontainer {
-    padding: 50px 0;
-    background: #f9f9f9;
+    padding: 50px;
     margin: 30px 0;
   }
 
   .add-word-form {
     display: flex;
+    flex-direction: column;
 
     &__column {
 
@@ -281,13 +428,11 @@ export default {
   .add-form-column {
 
     &:first-of-type {
-      max-width: 200px;
-      flex: 0 0 200px;
+    display: flex;
     }
 
     &:nth-of-type(2) {
-      max-width: calc(100% - 200px);
-      flex: 0 0 calc(100% - 200px);
+      position: relative;
     }
 
     .times {
@@ -296,22 +441,9 @@ export default {
     }
   }
 
-  .form-input-group {
-    margin-bottom: 15px;
-    margin-right: 10px;
 
-    label {
-      display: block;
-      font-size: 12px;
-      margin-bottom: 5px;
-      color: #aaa;
-      font-weight: bold;
-    }
-
-    input {
-      border: 1px solid #ccc;
-      padding: 5px;
-    }
+  .form-input {
+    border-right: 1px solid;
   }
 
   .inputs-set {
@@ -325,5 +457,15 @@ export default {
     font-size: 20px;
     margin-bottom: 20px;
     font-weight: bold;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .times {
+      flex-direction: row;
+    }
   }
 </style>
