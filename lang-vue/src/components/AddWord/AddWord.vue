@@ -38,75 +38,65 @@
             <div v-if="partofspeechId === 1" class="times">
               <div class="inputs-heading">L.p</div>
               <div class="inputs-set">
-                <div
+                <InputGroup
                   v-for="(value, index) in grammaticalCases"
                   v-bind:key="index"
-                  class="form-input-group"
+                  v-bind:id="`new-word-translation`"
+                  v-bind:model="nounCases.lp[value.value]"
+                  v-on:input="nounCases.lp[value.value] = $event"
                 >
-                  <label for="nominative">{{ value.value }}</label>
-                  <input
-                    id="nominative"
-                    v-model="nounCases.lp[value.value]"
-                  />
-                </div>
+                  {{ value.value }}
+                </InputGroup>
               </div>
               <div class="inputs-heading">L.m</div>
               <div class="inputs-set">
-                <div
+                <InputGroup
                   v-for="(value, index) in grammaticalCases"
                   v-bind:key="index"
-                  class="form-input-group"
+                  v-bind:id="`new-word-translation`"
+                  v-bind:model="nounCases.lm[value.value]"
+                  v-on:input="nounCases.lm[value.value] = $event"
                 >
-                  <label for="nominative">{{ value.value }}</label>
-                  <input
-                    id="nominative"
-                    v-model="nounCases.lm[value.value]"
-                  />
-                </div>
+                  {{ value.value }}
+                </InputGroup>
               </div>
             </div>
             <div v-if="partofspeechId === 2" class="times">
               <div class="inputs-heading">Present</div>
               <div class="inputs-set">
-                <div
+                <InputGroup
                   v-for="(value, index) in allTimePersons"
                   v-bind:key="index"
-                  class="form-input-group"
+                  v-bind:id="`nominative`"
+                  v-bind:model="verbPerson.present[value.value]"
+                  v-on:input="verbPerson.present[value.value] = $event"
                 >
-                  <label for="nominative">{{ replacePersonTimeLabel(value.value) }}</label>
-                  <input
-                    id="nominative"
-                    v-model="verbPerson.present[value.value]"
-                  />
-                </div>
+                  {{ replacePersonTimeLabel(value.value) }}
+                </InputGroup>
               </div>
               <div class="inputs-heading">Past</div>
               <div class="inputs-set">
-                <div
+                <InputGroup
                   v-for="(value, index) in allTimePersons"
                   v-bind:key="index"
-                  class="form-input-group"
+                  v-bind:id="`nominative`"
+                  v-bind:model="verbPerson.past[value.value]"
+                  v-on:input="verbPerson.past[value.value] = $event"
                 >
-                  <label for="nominative">{{ replacePersonTimeLabel(value.value) }}</label>
-                  <input
-                    id="nominative"
-                    v-model="verbPerson.past[value.value]"
-                  />
-                </div>
+                  {{ replacePersonTimeLabel(value.value) }}
+                </InputGroup>
               </div>
               <div class="inputs-heading">Future</div>
               <div class="inputs-set">
-                <div
+                <InputGroup
                   v-for="(value, index) in allTimePersons"
                   v-bind:key="index"
-                  class="form-input-group"
+                  v-bind:id="`nominative`"
+                  v-bind:model="verbPerson.future[value.value]"
+                  v-on:input="verbPerson.future[value.value] = $event"
                 >
-                  <label for="nominative">{{ replacePersonTimeLabel(value.value) }}</label>
-                  <input
-                    id="nominative"
-                    v-model="verbPerson.future[value.value]"
-                  />
-                </div>
+                  {{ replacePersonTimeLabel(value.value) }}
+                </InputGroup>
               </div>
             </div>
           <div v-if="partofspeechId === 3" class="form-container">
@@ -116,19 +106,17 @@
                 v-bind:key="index"
                 class="grammaticalCases"
               >
-              <div class="inputs-heading">{{ singleCase.value }}</div>
-                  <div class="inputs-set">
-                <div
-                  v-for="(sexType, index) in allSexTypes"
-                  v-bind:key="index"
-                  class="form-input-group"
-                >
-                  <label for="nominative">{{ sexType.value }}</label>
-                    <input
-                      id="nominative"
-                      v-model="adj.lp[singleCase.value][sexType.value]"
-                    />
-                  </div>
+                <div class="inputs-heading">{{ singleCase.value }}</div>
+                <div class="inputs-set">
+                  <InputGroup
+                    v-for="(sexType, index) in allSexTypes"
+                    v-bind:key="index"
+                    v-bind:id="`nominative`"
+                    v-bind:model="adj.lp[singleCase.value][sexType.value]"
+                    v-on:input="adj.lp[singleCase.value][sexType.value] = $event"
+                  >
+                    {{ sexType.value }}
+                  </InputGroup>
                 </div>
               </div>
             </div>
@@ -138,20 +126,17 @@
                 v-bind:key="index"
                 class="grammaticalCases"
               >
-              <div class="inputs-heading">{{ singleCase.value }}</div>
-                  <div class="inputs-set">
-                <div
-                  v-for="(sexType, index) in allSexTypes"
-                  v-bind:key="index"
-                  class="form-input-group"
-                >
-                  <label for="nominative">{{ sexType.value }}</label>
-                    <input
-                      id="nominative"
-                      v-model="adj.lm[singleCase.value][sexType.value]"
-                    />
-                    {{adj.lm[singleCase.value][sexType.value]}}
-                  </div>
+                <div class="inputs-heading">{{ singleCase.value }}</div>
+                <div class="inputs-set">
+                  <InputGroup
+                    v-for="(sexType, index) in allSexTypes"
+                    v-bind:key="index"
+                    v-bind:id="`nominative`"
+                    v-bind:model="adj.lm[singleCase.value][sexType.value]"
+                    v-on:input="adj.lm[singleCase.value][sexType.value] = $event"
+                  >
+                    {{ sexType.value }}
+                  </InputGroup>
                 </div>
               </div>
             </div>
