@@ -4,7 +4,7 @@
     <button @click="addWord">Add</button>
     <div class="addcontainer">
       <div class="form-input-group">
-      <label for="part-of-speech">Choose part of speech</label>
+      <VLabel v-bind:for="`part-of-speech`">Choose part of speech</VLabel>
         <select
           id="part-of-speech"
           v-model="partofspeechId">
@@ -18,21 +18,23 @@
         </select>
       </div>
       <form class="add-word-form">
-        <div class="add-form-column">
-          <InputGroup
-            v-bind:id="`new-word`"
-            v-bind:model="newWord"
-            v-on:input="newWord = $event"
-          >
-            Type new word
-          </InputGroup>
-          <InputGroup
-            v-bind:id="`new-word-translation`"
-            v-bind:model="translation"
-            v-on:input="translation = $event"
-          >
-            Type translation
-          </InputGroup>
+        <div class="main-data">
+          <div class="add-form-column">
+            <InputGroup
+              v-bind:id="`new-word`"
+              v-bind:model="newWord"
+              v-on:input="newWord = $event"
+            >
+              Type new word
+            </InputGroup>
+            <InputGroup
+              v-bind:id="`new-word-translation`"
+              v-bind:model="translation"
+              v-on:input="translation = $event"
+            >
+              Type translation
+            </InputGroup>
+          </div>
         </div>
         <div class="add-form-column">
             <div v-if="partofspeechId === 1" class="times">
@@ -99,7 +101,7 @@
                 </InputGroup>
               </div>
             </div>
-          <div v-if="partofspeechId === 3" class="form-container">
+          <div v-if="partofspeechId === 3" class="times">
             <div class="form-container-data">
               <div
                 v-for="(singleCase, index) in grammaticalCases"
@@ -107,7 +109,7 @@
                 class="grammaticalCases"
               >
                 <div class="inputs-heading">{{ singleCase.value }}</div>
-                <div class="inputs-set">
+                <div class="inputs-set inputs-set--adj">
                   <InputGroup
                     v-for="(sexType, index) in allSexTypes"
                     v-bind:key="index"
@@ -127,7 +129,7 @@
                 class="grammaticalCases"
               >
                 <div class="inputs-heading">{{ singleCase.value }}</div>
-                <div class="inputs-set">
+                <div class="inputs-set inputs-set--adj">
                   <InputGroup
                     v-for="(sexType, index) in allSexTypes"
                     v-bind:key="index"
@@ -150,11 +152,13 @@
 <script>
 import gql from 'graphql-tag';
 import InputGroup from '../UI/Form/Input/InputGroup.vue';
+import VLabel from '../UI/Form/Input/VLabel.vue';
 
 export default {
   name: 'Add',
   components: {
     InputGroup,
+    VLabel,
   },
   apollo: {
     allPartsOfSpeech: gql`
@@ -397,8 +401,12 @@ export default {
 
 <style lang="scss" scoped>
   .addcontainer {
-    padding: 50px;
+    padding: 0;
     margin: 30px 0;
+
+    @media only screen and (min-width: 768px) {
+      padding: 50px;
+    }
   }
 
   .add-word-form {
@@ -410,10 +418,30 @@ export default {
     }
   }
 
+  .form-container-data {
+    width: 100%;
+
+      @media only screen and (min-width: 768px) {
+        width: auto;
+        display: flex;
+        flex-wrap: wrap;
+      }
+  }
+
   .add-form-column {
 
     &:first-of-type {
-    display: flex;
+      display: flex;
+      flex-direction: column;
+
+      @media only screen and (min-width: 440px) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      @media only screen and (min-width: 768px) {
+        justify-content: flex-start;
+      }
     }
 
     &:nth-of-type(2) {
@@ -426,6 +454,11 @@ export default {
     }
   }
 
+  .main-data {
+    padding: 20px 0;
+    border-bottom: 1px solid;
+    margin-bottom: 20px;
+  }
 
   .form-input {
     border-right: 1px solid;
@@ -433,9 +466,21 @@ export default {
 
   .inputs-set {
     display: flex;
-    justify-content: start;
     width: 100%;
     flex-wrap: wrap;
+
+    @media only screen and (min-width: 440px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    @media only screen and (min-width: 768px) {
+      justify-content: flex-start;
+    }
+
+    &--adj {
+      flex-direction: column;
+    }
   }
 
   .inputs-heading {

@@ -39,6 +39,11 @@ export default {
       border-radius: 5px;
       background: #fafafa;
       color: #666;
+      width: 100%;
+
+        @media only screen and (min-width: 768px) {
+            width: auto;
+        }
     }
 
 </style>
