@@ -3,8 +3,8 @@
       <TableRow
         v-for="(item, index) in tableDataArray"
         v-bind:key="index"
-        v-bind:routeIndex="index"
-        v-bind:tableRow="item"
+        v-bind:routeIndex="item.id"
+        v-bind:tableRow="removeRouteIndexFromSourceArray(item)"
         v-bind:index="index + 1"
         v-bind:checkRouter="checkRouter"
       />
@@ -27,6 +27,12 @@ export default {
       type: [Number, Boolean],
     },
   },
+  methods: {
+    removeRouteIndexFromSourceArray(obj) {
+      delete obj.id;
+      return obj;
+    },
+  },
 };
 </script>
 
@@ -42,6 +48,8 @@ export default {
             border-bottom: 1px solid $gray-light-1;
             line-height: 2;
             color: $gray;
+            width: 100%;
+            display: block;
 
             &:hover {
                 background: $gray-light-1;
