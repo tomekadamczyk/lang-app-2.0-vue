@@ -1,57 +1,50 @@
 <template>
-    <div>
-        <h1 class="word__name"><strong>{{ wordName }}</strong> - {{ wordTranslation }}</h1>
+    <div v-if="$apollo.loading">Loading...</div>
+    <div class="word" v-else>
+        <h1 class="word__name">
+          <strong>{{ wordFromDatabase.value }}</strong>
+           - {{ wordFromDatabase.translation }}
+        </h1>
         <div
           class="tables"
-          v-if="selectedCard.partOfSpeech === 'noun'"
+          v-if="wordFromDatabase.partofspeechId.id === 1"
         >
           <NounTable
-            v-bind:counting="singular"
-            v-bind:selectedCard="selectedCard"
-            v-bind:grammaticalCasesArray="grammaticalCasesArray"
-          />
-          <NounTable
-            v-bind:counting="plural"
-            v-bind:selectedCard="selectedCard"
+            v-for="(count, index) in counting"
+            v-bind:key="index"
+            v-bind:counting="count"
+            v-bind:selectedCard="JSON.parse(wordFromDatabase.wordSpecific)"
             v-bind:grammaticalCasesArray="grammaticalCasesArray"
           />
         </div>
         <div
           class="tables"
-          v-if="selectedCard.partOfSpeech === 'verb'"
+          v-if="wordFromDatabase.partofspeechId.id === 2"
         >
           <VerbTable
-            v-bind:selectedCard="selectedCard"
-            v-bind:time="time.present"
-          />
-          <VerbTable
-            v-bind:selectedCard="selectedCard"
-            v-bind:time="time.past"
-          />
-          <VerbTable
-            v-bind:selectedCard="selectedCard"
-            v-bind:time="time.future"
+            v-for="(item, index) in time"
+            v-bind:key="index"
+            v-bind:time="item"
+            v-bind:selectedCard="JSON.parse(wordFromDatabase.wordSpecific)"
           />
         </div>
         <div
           class="tables"
-          v-if="selectedCard.partOfSpeech === 'adjective'"
+          v-if="wordFromDatabase.partofspeechId.id === 3"
         >
           <AdjectiveTable
-            v-bind:selectedCard="selectedCard"
+            v-for="(count, index) in counting"
+            v-bind:key="index"
+            v-bind:counting="count"
+            v-bind:selectedCard="JSON.parse(wordFromDatabase.wordSpecific)"
             v-bind:grammaticalCasesArray="grammaticalCasesArray"
-            v-bind:counting="singular"
-          />
-          <AdjectiveTable
-            v-bind:selectedCard="selectedCard"
-            v-bind:grammaticalCasesArray="grammaticalCasesArray"
-            v-bind:counting="plural"
           />
         </div>
     </div>
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import NounTable from './NounTable/NounTable.vue';
 import VerbTable from './VerbTable/VerbTable.vue';
 import AdjectiveTable from './AdjectiveTable/AdjectiveTable.vue';
@@ -66,12 +59,12 @@ export default {
   },
   data() {
     return {
-      singular: 'lp',
-      plural: 'lm',
-      selectedCard: {},
-      wordName: '',
-      wordTranslation: '',
+      counting: {
+        singular: 'lp',
+        plural: 'lm',
+      },
       wordId: null,
+      partOfSpeech: null,
       grammaticalCasesArray: [],
       sharedState: store.state,
       time: {
@@ -81,44 +74,65 @@ export default {
       },
     };
   },
+  apollo: {
+    word: {
+      query: gql`
+        query word($id: Int!) {
+        word(id: $id) {
+          id,
+          value,
+          translation,
+          partofspeechId {
+            id
+          },
+          wordSpecific
+        }
+      }`,
+      variables() {
+        return {
+          id: this.wordId,
+        };
+      },
+    },
+    grammaticalCases: gql`
+      query getGrammaticalCases {
+      grammaticalCases {
+        value
+      }
+    }`,
+    allPartsOfSpeech: gql`
+      query allPartsOfSpeech {
+      allPartsOfSpeech {
+        id,
+        value
+      }
+    }`,
+  },
   methods: {
-    getWordId() {
-      this.wordId = Number(this.$route.params.wordId);
+    generateWord() {
+      return this.word;
     },
     generateWordData() {
       Object.keys(this.grammaticalCases).forEach((caseData) => {
         this.grammaticalCasesArray.push(this.grammaticalCases[caseData].value);
       });
-      Object.keys(this.selectedCard).forEach((key) => {
-        if (key === 'value') {
-          this.wordName = this.selectedCard[key];
-        }
-        if (key === 'translation') {
-          this.wordTranslation = this.selectedCard[key];
-        }
-      });
     },
-  },
-  created() {
-    this.getWordId();
-    store.state.languages[0].cards.forEach((card) => {
-      Object.keys(card).forEach((cardData) => {
-        if (card[cardData] === this.wordId) {
-          this.selectedCard = card;
-        }
-      });
-    });
-    this.generateWordData();
   },
   computed: {
-    grammaticalCases() {
-      return this.$store.state.grammaticalCases;
+    wordFromDatabase() {
+      this.generateWordData();
+      return this.generateWord();
     },
+  },
+  beforeMount() {
+    this.wordId = Number(this.$route.params.wordId);
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/style.scss";
+
   .tables {
     width: 100%;
 
@@ -127,6 +141,10 @@ export default {
       display: inline-block;
       margin-right: 100px;
       vertical-align: top;
+      border: 1px solid $primary;
+      border-radius: 10px;
+      padding: 10px 27px;
+      box-shadow: 3px 3px 24px 1px $gray-light-2;
     }
   }
 
