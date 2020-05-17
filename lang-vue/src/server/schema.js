@@ -9,7 +9,7 @@ const {
 } = require('graphql');
 const { GraphQLJSON } = require('graphql-type-json');
 const {
-  Word, PartOfSpeech, GrammaticalCase, TimePerson,
+  Word, PartOfSpeech, GrammaticalCase, TimePerson, SexType, Language
 } = require('./connector.js');
 
 
@@ -37,6 +37,23 @@ const TimePersonType = new GraphQLObjectType({
   }),
 });
 
+const SexTypeType = new GraphQLObjectType({
+  name: 'SexType',
+  fields: () => ({
+    id: { type: GraphQLInt },
+    value: { type: GraphQLString },
+  }),
+});
+
+const LanguageType = new GraphQLObjectType({
+  name: 'Language',
+  fields: () => ({
+    id: { type: GraphQLInt },
+    value: { type: GraphQLString },
+    slug: { type: GraphQLString },
+  }),
+});
+
 const WordType = new GraphQLObjectType({
   name: 'Word',
   fields: () => ({
@@ -59,6 +76,12 @@ const WordType = new GraphQLObjectType({
         return word.getGrammaticalcase();
       },
     },
+    languageId: {
+      type: LanguageType,
+      resolve(word) {
+        return word.getLanguage();
+      },
+    },
   }),
 });
 
@@ -67,8 +90,13 @@ const rootQuery = new GraphQLObjectType({
   fields: {
     words: {
       type: new GraphQLList(WordType),
+      args: {
+        languageId: {
+          type: new GraphQLNonNull(GraphQLInt),
+        }
+      },
       resolve(obj, args) {
-        return Word.findAll({ where: args });
+        return Word.findAll({ where: {languageId: args.languageId} });
       },
     },
     word: {
@@ -92,6 +120,18 @@ const rootQuery = new GraphQLObjectType({
       type: new GraphQLList(TimePersonType),
       resolve(obj, args) {
         return TimePerson.findAll({ where: args });
+      },
+    },
+    allSexTypes: {
+      type: new GraphQLList(SexTypeType),
+      resolve(obj, args) {
+        return SexType.findAll({ where: args });
+      },
+    },
+    allLanguages: {
+      type: new GraphQLList(LanguageType),
+      resolve(obj, args) {
+        return Language.findAll({ where: args });
       },
     },
     partOfSpeech: {
@@ -133,17 +173,21 @@ const mutation = new GraphQLObjectType({
       args: {
         value: { type: new GraphQLNonNull(GraphQLString) },
         translation: { type: GraphQLString },
-        partofspeechId: { type: GraphQLInt },
         wordSpecific: { type: GraphQLJSON },
+        partofspeechId: { type: GraphQLInt },
+        grammaticalcaseId:  { type: GraphQLInt },
+        languageId: { type: GraphQLInt },
       },
       resolve(obj, {
-        value, translation, wordSpecific, partofspeechId,
+        value, translation, wordSpecific, partofspeechId, grammaticalcaseId, languageId
       }, context) {
         return Word.create({
           value,
           translation,
           wordSpecific,
           partofspeechId,
+          grammaticalcaseId,
+          languageId
         });
       },
     },
