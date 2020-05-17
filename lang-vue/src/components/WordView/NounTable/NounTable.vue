@@ -1,10 +1,13 @@
 <template>
+  <div class="table">
+      <h3 class="table__heading">{{counting}}</h3>
     <VTable
         v-bind:tableDataArray="preparedData"
         v-bind:dataToHide="propsToHide"
         v-bind:checkRouter="checkRouter"
         class="table"
     />
+  </div>
 </template>
 
 <script>
@@ -38,26 +41,22 @@ export default {
       const newDictionaryObjects = {};
       const arrayOfDictionaryObjects = [];
       Object.keys(this.selectedCard).forEach((item) => {
-        Object.keys(this.selectedCard[item]).forEach((key) => {
-          const checkNumber = Number(key);
+        // eslint-disable-next-line no-restricted-globals
+        if (item === counting) {
+          const singularGrammarCasesObject = this.selectedCard[counting];
 
-          // eslint-disable-next-line no-restricted-globals
-          if (isNaN(checkNumber) && key === counting) {
-            const singularGrammarCasesObject = this.selectedCard[item][counting];
-
-            if (singularGrammarCasesObject !== undefined) {
-              Object.keys(singularGrammarCasesObject).forEach((caseName) => {
-                if (this.grammaticalCasesArray.includes(caseName)) {
-                  newDictionaryObjects[item] = {
-                    case: caseName,
-                    value: singularGrammarCasesObject[caseName],
-                  };
-                  arrayOfDictionaryObjects.push(newDictionaryObjects[item]);
-                }
-              });
-            }
+          if (singularGrammarCasesObject !== undefined) {
+            Object.keys(singularGrammarCasesObject).forEach((caseName) => {
+              if (this.grammaticalCasesArray.includes(caseName)) {
+                newDictionaryObjects[item] = {
+                  case: caseName,
+                  value: singularGrammarCasesObject[caseName],
+                };
+                arrayOfDictionaryObjects.push(newDictionaryObjects[item]);
+              }
+            });
           }
-        });
+        }
       });
       this.preparedData = arrayOfDictionaryObjects;
       return this.preparedData;
@@ -69,6 +68,10 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 
+
+  .table__heading {
+    text-transform: capitalize;
+  }
 </style>
