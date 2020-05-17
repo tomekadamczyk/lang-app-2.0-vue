@@ -1,9 +1,12 @@
 <template>
-    <VTable
-        v-bind:tableDataArray="preparedData"
-        v-bind:checkRouter="checkRouter"
-        class="table"
-    />
+  <div class="table">
+      <h3 class="table__heading">{{time}}</h3>
+      <VTable
+          v-bind:tableDataArray="preparedData"
+          v-bind:checkRouter="checkRouter"
+          class="table"
+      />
+  </div>
 </template>
 
 <script>
@@ -32,24 +35,34 @@ export default {
     createWordCases(time) {
       const arrayOfDictionaryObjects = [];
       const newDictionaryObjects = {};
-      Object.keys(this.selectedCard).forEach((item) => {
-        Object.keys(this.selectedCard[item]).forEach((key) => {
-          if (key === time) {
-            Object.keys(this.selectedCard[item][key]).forEach((verbTime) => {
-              newDictionaryObjects[item] = {
-                person: verbTime,
-                value: this.selectedCard[item][key][verbTime],
-              };
-              if (newDictionaryObjects[item].person === 'youSingular') {
-                newDictionaryObjects[item].person = 'You';
-              }
-              if (newDictionaryObjects[item].person === 'youPlural') {
-                newDictionaryObjects[item].person = 'You';
-              }
-              arrayOfDictionaryObjects.push(newDictionaryObjects[item]);
-            });
-          }
-        });
+      Object.keys(this.selectedCard).forEach((key) => {
+        if (key === time) {
+          Object.keys(this.selectedCard[key]).forEach((verbTime) => {
+            newDictionaryObjects[key] = {
+              person: verbTime,
+              value: this.selectedCard[key][verbTime],
+            };
+            if (newDictionaryObjects[key].person === 'singularFirst') {
+              newDictionaryObjects[key].person = 'I';
+            }
+            if (newDictionaryObjects[key].person === 'singularSecond') {
+              newDictionaryObjects[key].person = 'You';
+            }
+            if (newDictionaryObjects[key].person === 'singularThird') {
+              newDictionaryObjects[key].person = 'He/She/It';
+            }
+            if (newDictionaryObjects[key].person === 'pluralFirst') {
+              newDictionaryObjects[key].person = 'We';
+            }
+            if (newDictionaryObjects[key].person === 'pluralSecond') {
+              newDictionaryObjects[key].person = 'You';
+            }
+            if (newDictionaryObjects[key].person === 'pluralThird') {
+              newDictionaryObjects[key].person = 'They';
+            }
+            arrayOfDictionaryObjects.push(newDictionaryObjects[key]);
+          });
+        }
       });
       this.preparedData = arrayOfDictionaryObjects;
       return this.preparedData;
@@ -61,6 +74,10 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+
+  .table__heading {
+    text-transform: capitalize;
+  }
 
 </style>
