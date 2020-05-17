@@ -1,5 +1,21 @@
 <template>
-  <tr class="table__row">
+    <router-link
+      v-if="routeIndex !== undefined"
+      :to="`/dictionary/${routeIndex}`"
+      class="table__row"
+    >
+      <tr>
+        <TableCell
+            v-for="(data, index) in singleRowData"
+            v-bind:tableCell="data"
+            v-bind:key="index"
+            v-bind:routeIndex="routeIndex"
+            v-bind:checkRouter="checkRouter"
+            v-bind:cellToLink="cellToLink"
+        />
+      </tr>
+    </router-link>
+    <tr v-else class="table__row">
       <TableCell
           v-for="(data, index) in singleRowData"
           v-bind:tableCell="data"
@@ -8,7 +24,7 @@
           v-bind:checkRouter="checkRouter"
           v-bind:cellToLink="cellToLink"
       />
-  </tr>
+    </tr>
 </template>
 
 <script>
@@ -37,6 +53,7 @@ export default {
     return {
       processedTableRowData: [],
       cellToLink: null,
+      link: `/dictionary/${this.routeIndex}`,
     };
   },
   methods: {
@@ -47,7 +64,6 @@ export default {
     },
     generateDataFromObject() {
       this.processedTableRowData = [];
-      this.processedTableRowData.push(this.index);
       this.fillArrayByObjectKeys(this.processedTableRowData, this.tableRow);
       this.getCellIndex();
       return this.processedTableRowData;
@@ -68,4 +84,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../../../assets/scss/style.scss";
 
+  a {
+    text-decoration: none;
+  }
 </style>
