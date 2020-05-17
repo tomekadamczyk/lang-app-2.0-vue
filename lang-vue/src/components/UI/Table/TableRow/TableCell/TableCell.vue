@@ -1,21 +1,8 @@
 <template>
-  <td v-if="checkRouter !== false"
-    :class="[typeof cellValue === 'number' ? 'table__id' : 'table__content']"
-  >
-    <span>
-      <router-link v-if="typeof tableCell === 'string' && cellValue === cellToLink" :to="link">
-        {{cellValue}}
-      </router-link>
-      <span v-else>
-        {{cellValue}}
-      </span>
-    </span>
-  </td>
   <td
-    v-else
-    :class="[typeof cellValue === 'number' ? 'table__id' : 'table__content']"
+    :class="[typeof tableCell === 'number' ? 'table__id' : 'table__content']"
   >
-    {{cellValue}}
+    {{tableCell}}
   </td>
 </template>
 
@@ -33,23 +20,13 @@ export default {
       type: [Number, Boolean],
     },
     cellToLink: {
-      type: String,
+      type: [String, Number],
     },
     routeIndex: {
       type: Number,
     },
     index: {
       type: Number,
-    },
-  },
-  data() {
-    return {
-      link: `/dictionary/${this.routeIndex}`,
-    };
-  },
-  computed: {
-    cellValue() {
-      return this.tableCell;
     },
   },
 };
