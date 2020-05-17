@@ -16,6 +16,18 @@
             {{ partOfSpeech.value }}
           </option>
         </select>
+        <VLabel v-bind:for="`language`">Choose Language</VLabel>
+        <select
+          id="language"
+          v-model="languageId">
+          <option
+            v-for="(language, index) in allLanguages"
+            v-bind:key="index"
+            v-bind:value="language.id"
+          >
+            {{ language.value }}
+          </option>
+        </select>
       </div>
       <form class="add-word-form">
         <div class="main-data">
@@ -187,6 +199,14 @@ export default {
       }
     }
     `,
+    allLanguages: gql`
+      query allLanguages {
+      allLanguages {
+        id,
+        value,
+        slug
+      }
+    }`,
   },
   data() {
     return {
@@ -194,6 +214,7 @@ export default {
       translation: '',
       wordSpecific: '',
       partofspeechId: '',
+      languageId: '',
       nounCases: {
         lp: {
           nominative: '',
@@ -325,6 +346,9 @@ export default {
     getSexTypes() {
       return this.allSexTypes;
     },
+    getLanguages() {
+      return this.allLanguages;
+    },
   },
   methods: {
     addWord() {
@@ -339,12 +363,15 @@ export default {
       }
       this.$apollo.mutate({
         mutation: gql`
-          mutation addWord ($value: String!, $translation: String!, $wordSpecific: JSON, $partofspeechId: Int!) {
-            addWord (value: $value, translation: $translation, wordSpecific: $wordSpecific, partofspeechId: $partofspeechId) {
+          mutation addWord ($value: String!, $translation: String!, $wordSpecific: JSON, $partofspeechId: Int!, $languageId: Int!) {
+            addWord (value: $value, translation: $translation, wordSpecific: $wordSpecific, partofspeechId: $partofspeechId, languageId: $languageId) {
               value,
               translation,
               wordSpecific,
               partofspeechId {
+                id
+              },
+              languageId {
                 id
               }
             }
@@ -355,6 +382,7 @@ export default {
           translation: this.translation,
           wordSpecific: this.wordSpecific,
           partofspeechId: this.partofspeechId,
+          languageId: this.languageId,
         },
       });
     },
