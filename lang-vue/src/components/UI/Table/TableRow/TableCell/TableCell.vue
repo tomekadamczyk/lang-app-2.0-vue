@@ -1,5 +1,6 @@
 <template>
   <td
+    v-if="tableCell != '__typename'"
     :class="[typeof tableCell === 'number' ? 'table__id' : 'table__content']"
   >
     {{tableCell}}
@@ -41,7 +42,9 @@ export default {
 
   .table__content {
     width: 120px;
-    font-weight: bold;
+    &:first-of-type {
+      font-weight: bold;
+    }
 
     span {
       display: block;

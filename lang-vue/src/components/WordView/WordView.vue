@@ -139,10 +139,10 @@ export default {
       display: inline-block;
       margin-right: 100px;
       vertical-align: top;
-      border: 1px solid $primary;
       border-radius: 10px;
       padding: 10px 27px;
-      box-shadow: 3px 3px 24px 1px $gray-light-2;
+      box-shadow: $box-shadow;
+      
     }
   }
 

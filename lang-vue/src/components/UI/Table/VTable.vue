@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     removeRouteIndexFromSourceArray(obj) {
-      delete obj.id;
+      delete obj['__typename'];
       return obj;
     },
   },
@@ -43,6 +43,7 @@ export default {
         width: 100%;
         margin: 30px auto 0;
         border-collapse: collapse;
+        font-size: 13px;
 
         &__row {
             border-bottom: 1px solid $gray-light-1;

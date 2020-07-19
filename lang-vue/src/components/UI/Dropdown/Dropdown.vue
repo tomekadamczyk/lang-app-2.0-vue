@@ -10,7 +10,7 @@
     <div
       class="dropdown-items"
     >
-      <DropdownOption 
+      <DropdownOption
         v-for="item in items"
         :key="item.id"
         :id="item.id"
@@ -24,10 +24,11 @@
 
 <script>
 import DropdownOption from './DropdownOption/DropdownOption.vue';
+
 export default {
   name: 'Dropdown',
   components: {
-    DropdownOption
+    DropdownOption,
   },
   props: {
     items: {
@@ -43,19 +44,20 @@ export default {
   },
   methods: {
     changeValue($event) {
-      console.log($event)
+      console.log($event);
       this.itemId = $event.id;
       this.chosenValue = $event.value;
       this.$emit('selectChange', this.itemId);
     },
     toggleItems() {
-        return this.showItems = !this.showItems;
-    }
+      return this.showItems = !this.showItems;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../../../assets/scss/style.scss";
 
     .dropdown-box {
         min-width: 140px;
@@ -63,7 +65,7 @@ export default {
         box-shadow: 1px 1px 15px 1px #ddd;
         border-radius: 10px;
         position: relative;
-        z-index: 99999999;
+        z-index: 100;
     }
 
     .lang-button {

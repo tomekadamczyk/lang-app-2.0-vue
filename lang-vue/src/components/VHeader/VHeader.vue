@@ -1,6 +1,6 @@
 <template>
   <header class="header" v-bind:class="{active: activeHeader}">
-    <NavigationItems 
+    <NavigationItems
       v-bind:activeHeader="activeHeader"
       v-on:closeNav="$emit('closeNav')"
     />
@@ -17,7 +17,7 @@ export default {
   },
   props: {
     activeHeader: {
-        type: Boolean,
+      type: Boolean,
     },
   },
   // TO DO: check why not working
@@ -47,7 +47,7 @@ export default {
     &.active {
       transform: translateY(0);
     }
-    
+
 
     @include media-screen(tablet-up) {
       width: 70px;

@@ -1,6 +1,6 @@
 <template>
     <li>
-        <span 
+        <span
             v-bind:class="{active: activeHeader}"
             >{{linkCategory}}</span>
         <ul class="nav-items" v-if="renderByCategory">
@@ -20,43 +20,58 @@
 <script>
 import NavigationItem from '../NavigationItem/NavigationItem.vue';
 import NAV_CATEGORIES from '../../../../data/navCategories';
-const { general, excercises, test, favorites } = NAV_CATEGORIES;
+
+const {
+  general, excercises, test, favorites,
+} = NAV_CATEGORIES;
 
 export default {
-    name: 'NavigationCategory',
-    components: {
-        NavigationItem,
+  name: 'NavigationCategory',
+  components: {
+    NavigationItem,
+  },
+  props: {
+    category: {
+      type: String,
     },
-    props: {
-        category: {
-            type: String,
+    activeHeader: {
+      type: Boolean,
+    },
+  },
+  data() {
+    return {
+      activeNavHeader: this.activeHeader,
+      linkCategory: this.category,
+      links: [
+        {
+          id: 0, name: 'Dashboard', placeholder: 'O', url: '/', category: general,
         },
-        activeHeader: {
-            type: Boolean,
+        {
+          id: 1, name: 'Flashcards', placeholder: 'O', url: '/flashcards', category: excercises,
         },
-    },
-    data() {
-        return {
-            activeNavHeader: this.activeHeader,
-            linkCategory: this.category,
-            links: [
-                {id: 0, name: 'Dashboard', placeholder: 'O', url: '/', category: general},
-                {id: 1, name: 'Flashcards', placeholder: 'O', url: '/flashcards', category: excercises},
-                {id: 2, name: 'Hangman', placeholder: 'O', url: '/hangman', category: excercises},
-                {id: 3, name: 'Dictionary', placeholder: 'O', url: '/dictionary', category: excercises},
-                {id: 4, name: 'test2', placeholder: 'O', url: '/hangman', category: test},
-                {id: 5, name: 'fav', placeholder: 'O', url: '/hangman', category: favorites},
-                {id: 6, name: 'fav2', placeholder: 'O', url: '/hangman', category: favorites},
-            ],
-        };
-    },
-    computed: {
-        renderByCategory() {
-            return this.links.filter(link => {
-                return link.category === this.linkCategory;
-            });
+        {
+          id: 2, name: 'Hangman', placeholder: 'O', url: '/hangman', category: excercises,
         },
+        {
+          id: 3, name: 'Dictionary', placeholder: 'O', url: '/dictionary', category: excercises,
+        },
+        {
+          id: 4, name: 'test2', placeholder: 'O', url: '/hangman', category: test,
+        },
+        {
+          id: 5, name: 'fav', placeholder: 'O', url: '/hangman', category: favorites,
+        },
+        {
+          id: 6, name: 'fav2', placeholder: 'O', url: '/hangman', category: favorites,
+        },
+      ],
+    };
+  },
+  computed: {
+    renderByCategory() {
+      return this.links.filter(link => link.category === this.linkCategory);
     },
+  },
 };
 </script>
 

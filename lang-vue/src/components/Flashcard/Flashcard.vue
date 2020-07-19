@@ -1,7 +1,7 @@
 <template>
     <div class="flashcard-container flex-center">
     <div class="flashcard">{{flashcardValue}}
-        <div 
+        <div
             class="flashcard__translation"
             v-bind:class="{active: isTranslationActive}"
         >
@@ -9,17 +9,17 @@
         </div>
     </div>
     <div class="flashcard__options">
-        <Button 
+        <Button
             v-bind:buttonName="btnWordValue"
             v-on:clickButton="showTranslation"
             class="flashcard__button"
         />
-        <Button 
+        <Button
             v-bind:buttonName="btnNextValue"
             v-on:clickButton="getCard"
             class="flashcard__button"
         />
-        <Dropdown 
+        <Dropdown
             v-on:selectChange="selectChanges"
         />
     </div>
@@ -32,61 +32,61 @@ import Dropdown from '../UI/Dropdown/Dropdown.vue';
 import store from '../../store.js';
 
 export default {
-    name: 'Flashcard',
-    components: {
-        Button,
-        Dropdown
+  name: 'Flashcard',
+  components: {
+    Button,
+    Dropdown,
+  },
+  data() {
+    return {
+      btnWordValue: 'Check translation',
+      btnNextValue: 'Next word',
+      flashcardValue: null,
+      flashcardTranslation: null,
+      isTranslationActive: false,
+    };
+  },
+  computed: {
+    dictionary() {
+      return this.$store.state.dictionary;
     },
-    data() {
-        return {
-            btnWordValue: 'Check translation',
-            btnNextValue: 'Next word',
-            flashcardValue: null,
-            flashcardTranslation: null,
-            isTranslationActive: false,
-        };
+  },
+  methods: {
+    onUpdateDictionary(langName) {
+      this.$store.dispatch('updateDictionary', langName);
     },
-    computed: {
-        dictionary() {
-            return this.$store.state.dictionary;
-        },
+    showTranslation() {
+      return this.isTranslationActive = true;
     },
-    methods: {
-        onUpdateDictionary(langName) {
-            this.$store.dispatch('updateDictionary', langName);
-        },
-        showTranslation() {
-            return this.isTranslationActive = true;
-        },
-        getRandomNumber(arr) {
-            const arrLength = arr.length;
-            const random = Math.floor(Math.random() * arrLength);
-            return random;
-        },
-        generateNewCard() {
-            const card = this.dictionary[this.getRandomNumber(store.state.dictionary)];
-            this.flashcardValue = card.value;
-            this.flashcardTranslation = card.translation;
-        },
-        hideTranslation() {
-            return this.isTranslationActive = false;
-        },
-        getCard() {
-            this.hideTranslation();
-            this.generateNewCard();
-        },
-        selectChanges($event) {
-            store.state.dictionary = [];
-            store.state.defaultLanguage = event.target.value;
-            this.onUpdateDictionary(store.state.defaultLanguage)
-        }
+    getRandomNumber(arr) {
+      const arrLength = arr.length;
+      const random = Math.floor(Math.random() * arrLength);
+      return random;
     },
-    created: function() {
-        store.state.defaultLanguage = store.state.languages[0].name;
-        this.onUpdateDictionary(store.state.defaultLanguage)
-        this.getCard();
-    }
-}
+    generateNewCard() {
+      const card = this.dictionary[this.getRandomNumber(store.state.dictionary)];
+      this.flashcardValue = card.value;
+      this.flashcardTranslation = card.translation;
+    },
+    hideTranslation() {
+      return this.isTranslationActive = false;
+    },
+    getCard() {
+      this.hideTranslation();
+      this.generateNewCard();
+    },
+    selectChanges($event) {
+      store.state.dictionary = [];
+      store.state.defaultLanguage = event.target.value;
+      this.onUpdateDictionary(store.state.defaultLanguage);
+    },
+  },
+  created() {
+    store.state.defaultLanguage = store.state.languages[0].name;
+    this.onUpdateDictionary(store.state.defaultLanguage);
+    this.getCard();
+  },
+};
 </script>
 
 <style lang="scss" scoped>

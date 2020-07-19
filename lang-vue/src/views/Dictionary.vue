@@ -10,9 +10,9 @@ import Dictionary from '../components/Dictionary/Dictionary.vue';
 
 export default {
   components: {
-    Dictionary
-  }  
-}
+    Dictionary,
+  },
+};
 </script>
 
 <style lang="scss" scoped>

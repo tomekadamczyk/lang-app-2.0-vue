@@ -10,9 +10,9 @@ import Flashcard from '../components/Flashcard/Flashcard.vue';
 
 export default {
   components: {
-    Flashcard
-  }  
-}
+    Flashcard,
+  },
+};
 </script>
 
 <style lang="scss" scoped>

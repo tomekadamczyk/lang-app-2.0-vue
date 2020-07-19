@@ -1,5 +1,5 @@
 <template>
-    <button 
+    <button
         class="btn"
         v-on:click="$emit('clickButton')"
     >{{value}}</button>
@@ -7,18 +7,18 @@
 
 <script>
 export default {
-    name: 'Button',
-    props: {
-        buttonName: {
-            type: String,
-        },
+  name: 'Button',
+  props: {
+    buttonName: {
+      type: String,
     },
-    data() {
-        return {
-            value: this.buttonName,
-        };
-    },
-}
+  },
+  data() {
+    return {
+      value: this.buttonName,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

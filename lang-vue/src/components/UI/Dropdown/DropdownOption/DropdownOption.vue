@@ -10,30 +10,30 @@
 
 <script>
 export default {
-    name: 'DropdownOption',
-    props: {
-        id: {
-            type: Number,
-        },
-        value: {
-            type: String,
-        },
+  name: 'DropdownOption',
+  props: {
+    id: {
+      type: Number,
     },
-    data() {
-        return {
-            option: this.name,
-            val: this.value,
-        };
+    value: {
+      type: String,
     },
-    methods: {
-        changeValue() {
-            this.$emit('selectChange', {
-              id: Number(this.id),
-              value: this.value
-            });
-        },
-    }
-}
+  },
+  data() {
+    return {
+      option: this.name,
+      val: this.value,
+    };
+  },
+  methods: {
+    changeValue() {
+      this.$emit('selectChange', {
+        id: Number(this.id),
+        value: this.value,
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

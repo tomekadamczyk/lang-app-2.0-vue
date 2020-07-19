@@ -1,5 +1,5 @@
 <template>
-    <li 
+    <li
         class="nav-item"
         v-on:click="$emit('closeNav')"
     >
@@ -11,21 +11,21 @@
 
 <script>
 export default {
-    name: 'NavigationItem',
-    props: {
-        name: {
-            type: String,
-        },
-        url: {
-            type: String,
-        },
+  name: 'NavigationItem',
+  props: {
+    name: {
+      type: String,
     },
-    data() {
-        return {
-            linkName: this.name,
-            linkUrl: this.url,
-        };
+    url: {
+      type: String,
     },
+  },
+  data() {
+    return {
+      linkName: this.name,
+      linkUrl: this.url,
+    };
+  },
 };
 </script>
 

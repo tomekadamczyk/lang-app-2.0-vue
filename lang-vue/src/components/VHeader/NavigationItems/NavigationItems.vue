@@ -1,5 +1,5 @@
 <template>
-    <NavigationCategories 
+    <NavigationCategories
         v-bind:activeHeader="activeHeader"
         v-on:closeNav="$emit('closeNav')"
      />
@@ -9,15 +9,15 @@
 import NavigationCategories from './NavigationCategory/NavigationCategories.vue';
 
 export default {
-    name: 'NavigationItems',
-    components: {
-        NavigationCategories,
+  name: 'NavigationItems',
+  components: {
+    NavigationCategories,
+  },
+  props: {
+    activeHeader: {
+      type: Boolean,
     },
-    props: {
-        activeHeader: {
-            type: Boolean,
-        },
-    },
+  },
 };
 </script>
 

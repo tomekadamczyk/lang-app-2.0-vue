@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     generateData() {
-      const dictionary = { ...this.words };
+      const dictionary = { ...this.allWords };
       const newDictionaryObjects = {};
       const arrayOfDictionaryObjects = [];
       Object.keys(dictionary).forEach((item) => {
@@ -59,6 +59,7 @@ export default {
           translation: dictionary[item].translation,
         };
         arrayOfDictionaryObjects.push(newDictionaryObjects[item]);
+        console.log(newDictionaryObjects[item]);
       });
       this.preparedData = arrayOfDictionaryObjects;
       return this.preparedData;

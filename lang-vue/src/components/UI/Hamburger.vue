@@ -1,6 +1,6 @@
 <template>
-    <div 
-        class="hamburger" 
+    <div
+        class="hamburger"
         v-bind:class="{active: activeHeader}"
         v-on:click="$emit('toggle')"
         >
@@ -12,13 +12,13 @@
 
 <script>
 export default {
-    name: 'Hamburger',
-    props: {
-        activeHeader: {
-            type: Boolean,
-        },
+  name: 'Hamburger',
+  props: {
+    activeHeader: {
+      type: Boolean,
     },
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -42,7 +42,7 @@ export default {
             border-radius: 20px;
             margin-bottom: 5px;
             background: $primary;
-            
+
             @include media-screen(tablet-up) {
                 background: $white;
             }
