@@ -1,5 +1,0 @@
-query allGrammaticalCases {
-    grammaticalCases {
-        value
-    }
-}

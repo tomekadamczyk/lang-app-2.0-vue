@@ -1,13 +1,19 @@
 <template>
-    <option value="val"></option>
+    <div
+      v-bind:id="id"
+      v-bind:value="value"
+      v-on:click="changeValue"
+    >
+      {{val}}
+    </div>
 </template>
 
 <script>
 export default {
     name: 'DropdownOption',
     props: {
-        name: {
-            type: String,
+        id: {
+            type: Number,
         },
         value: {
             type: String,
@@ -19,6 +25,14 @@ export default {
             val: this.value,
         };
     },
+    methods: {
+        changeValue() {
+            this.$emit('selectChange', {
+              id: Number(this.id),
+              value: this.value
+            });
+        },
+    }
 }
 </script>
 

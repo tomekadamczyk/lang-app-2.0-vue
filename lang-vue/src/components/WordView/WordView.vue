@@ -7,7 +7,7 @@
         </h1>
         <div
           class="tables"
-          v-if="wordFromDatabase.partofspeechId.id === 1"
+          v-if="wordFromDatabase.PartofspeechId === 1"
         >
           <NounTable
             v-for="(count, index) in counting"
@@ -19,7 +19,7 @@
         </div>
         <div
           class="tables"
-          v-if="wordFromDatabase.partofspeechId.id === 2"
+          v-if="wordFromDatabase.PartofspeechId === 2"
         >
           <VerbTable
             v-for="(item, index) in time"
@@ -30,7 +30,7 @@
         </div>
         <div
           class="tables"
-          v-if="wordFromDatabase.partofspeechId.id === 3"
+          v-if="wordFromDatabase.PartofspeechId === 3"
         >
           <AdjectiveTable
             v-for="(count, index) in counting"
@@ -75,16 +75,14 @@ export default {
     };
   },
   apollo: {
-    word: {
+    Word: {
       query: gql`
-        query word($id: Int!) {
-        word(id: $id) {
+        query Word($id: Int!) {
+        Word(id: $id) {
           id,
           value,
           translation,
-          partofspeechId {
-            id
-          },
+          PartofspeechId
           wordSpecific
         }
       }`,
@@ -94,15 +92,15 @@ export default {
         };
       },
     },
-    grammaticalCases: gql`
-      query getGrammaticalCases {
-      grammaticalCases {
+    allGrammaticalCases: gql`
+      query allGrammaticalCases {
+      allGrammaticalCases {
         value
       }
     }`,
-    allPartsOfSpeech: gql`
-      query allPartsOfSpeech {
-      allPartsOfSpeech {
+    allPartOfSpeeches: gql`
+      query allPartOfSpeeches {
+      allPartOfSpeeches {
         id,
         value
       }
@@ -110,11 +108,11 @@ export default {
   },
   methods: {
     generateWord() {
-      return this.word;
+      return this.Word;
     },
     generateWordData() {
-      Object.keys(this.grammaticalCases).forEach((caseData) => {
-        this.grammaticalCasesArray.push(this.grammaticalCases[caseData].value);
+      Object.keys(this.allGrammaticalCases).forEach((caseData) => {
+        this.grammaticalCasesArray.push(this.allGrammaticalCases[caseData].value);
       });
     },
   },
