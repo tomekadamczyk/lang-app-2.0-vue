@@ -37,7 +37,6 @@ export default {
       this.isLayoutActive = !this.isLayoutActive;
     },
     closeNav() {
-      console.log('asdasd');
       this.isLayoutActive = false;
     },
   },
