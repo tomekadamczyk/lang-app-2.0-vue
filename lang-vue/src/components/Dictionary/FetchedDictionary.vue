@@ -20,7 +20,7 @@ export default {
   },
   props: {
     languageVarId: {
-        type: Number,
+      type: Number,
     },
   },
   data() {
@@ -33,16 +33,18 @@ export default {
   apollo: {
     allWords: {
       query: gql`
-        query allWords($langId: Int!) {
-        allWords(LanguageId: $langId) {
+        query allWords($langId: Int!, $userId: Int) {
+        allWords(LanguageId: $langId, UserId: $userId) {
           id
           value
           translation
         }
       }`,
       variables() {
+        console.log(Number(this.$store.state.userId))
         return {
           langId: this.languageVarId,
+          userId: Number(this.$store.state.userId),
         };
       },
     },
@@ -59,7 +61,6 @@ export default {
           translation: dictionary[item].translation,
         };
         arrayOfDictionaryObjects.push(newDictionaryObjects[item]);
-        console.log(newDictionaryObjects[item]);
       });
       this.preparedData = arrayOfDictionaryObjects;
       return this.preparedData;
