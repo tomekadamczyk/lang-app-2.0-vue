@@ -2,10 +2,30 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
+const getCookie = (cname) => {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+       c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+       return c.substring(name.length, c.length);
+      }
+  }
+  return "";
+}
+
+const userToken = getCookie('token');
+const userId = getCookie('userId');
 
 export default new Vuex.Store({
   state: {
     defaultLanguage: 'czech',
+    token: userToken || '',
+    userId: userId || '',
     dictionary: [],
     partsOfSpeech: [
       { value: 'noun' },
@@ -226,6 +246,12 @@ export default new Vuex.Store({
           });
         }
       });
+    },
+    GET_ACTIVE_USER_ID(state, id) {
+      state.activeUserId = id;
+    },
+    AUTHENTICATE_USER(state, value) {
+      state.isAuthenticated = value;
     },
   },
   actions: {
