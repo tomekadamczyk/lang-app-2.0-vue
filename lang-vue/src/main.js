@@ -7,19 +7,44 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import './registerServiceWorker';
+import { setContext } from "apollo-link-context";
 
-// HTTP connection to the API
 const httpLink = createHttpLink({
-  // You should use an absolute URL here
   uri: 'http://localhost:3000/graphql',
 });
 
-// Cache implementation
+
+const getCookie = (cname) => {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+       c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+       return c.substring(name.length, c.length);
+      }
+  }
+  return "";
+}
+
+
+const authLink = setContext((_, { headers }) => {
+  const token = getCookie('token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
+
 const cache = new InMemoryCache();
 
-// Create the apollo client
 const apolloClient = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache,
 });
 
