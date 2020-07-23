@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     changeValue($event) {
-      console.log($event);
       this.itemId = $event.id;
       this.chosenValue = $event.value;
       this.$emit('selectChange', this.itemId);
