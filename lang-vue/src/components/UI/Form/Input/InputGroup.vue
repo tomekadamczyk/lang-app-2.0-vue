@@ -44,13 +44,7 @@ export default {
     margin-bottom: 15px;
     width: 100%;
 
-    @media only screen and (min-width: 440px) {
-        max-width: 49%;
-        flex: 0 0 49%;
-    }
-
     @media only screen and (min-width: 768px) {
-        margin-right: 10px;
         width: auto;
         max-width: unset;
         flex: unset;

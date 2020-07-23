@@ -1,6 +1,7 @@
 <template>
     <input
       v-bind:id="id"
+      v-bind:name="name"
       v-model="vModel"
     />
 </template>
@@ -11,6 +12,9 @@ export default {
   name: 'VInput',
   props: {
     id: {
+      type: String,
+    },
+    name: {
       type: String,
     },
     model: {
@@ -31,19 +35,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../../assets/scss/style.scss";
 
     input {
       border: 1px solid #ccc;
       padding: 10px 15px;
-      box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.08);
+      box-shadow: $box-shadow;
       border-radius: 5px;
-      background: #fafafa;
+      background: #fff;
       color: #666;
       width: 100%;
-
-        @media only screen and (min-width: 768px) {
-            width: auto;
-        }
     }
 
 </style>

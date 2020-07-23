@@ -25,7 +25,7 @@ export default {
       display: block;
       font-size: 12px;
       margin-bottom: 5px;
-      color: #aaa;
+      color: #666;
       font-weight: bold;
     }
 
