@@ -2,6 +2,10 @@
     @if $size == tablet-up {
       @media (min-width: 768px) { @content; }
     }
+
+    @if $size == phone-wide-up {
+      @media (min-width: 576px) { @content; }
+    }
     
     @else if $size == tablet-landscape-up {
       @media (min-width: 992px) { @content; }
