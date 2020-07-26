@@ -1,5 +1,5 @@
 <template>
-    <div class="layout-wrapper">
+    <div class="layout-wrapper" v-bind:class="{ 'dark-mode' : darkMode }">
         <Hamburger
             v-bind:activeHeader="isLayoutActive"
             v-on:toggle="toggleNavigation"
@@ -14,6 +14,8 @@
             class="layout"
             v-bind:class="{active: isLayoutActive}"
         >
+        <input type="checkbox" id="dark-mode" v-model="darkMode">
+        <label for="dark-mode">Dark mode</label>
             <slot/>
         </main>
     </div>
@@ -32,7 +34,13 @@ export default {
   data() {
     return {
       isLayoutActive: false,
+      darkMode: localStorage.getItem('darkMode') || false,
     };
+  },
+  watch: {
+    darkMode() {
+      localStorage.setItem('darkMode', this.darkMode)
+    }
   },
   computed: {
     isAuthenticated() {
@@ -57,7 +65,8 @@ export default {
 @import "../../assets/scss/style.scss";
 
     .layout-wrapper {
-        width: 100%;
+      width: 100%;
+      background: var(--layout-backround);
     }
 
     .layout {
