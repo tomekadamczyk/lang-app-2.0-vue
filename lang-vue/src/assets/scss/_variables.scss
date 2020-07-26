@@ -1,1 +1,4 @@
-$box-shadow: 3px 3px 69px 0px $gray-light-4;
+$box-shadow: 0 0 30px 1px var(--box-shadow-1);
+$dropdown-box-shadow: 1px 1px 15px 3px var(--box-shadow-1);
+$header-box-shadow: 3px 5px 66px 4px var(--box-shadow-2);
+$border-radius: 0.625rem;

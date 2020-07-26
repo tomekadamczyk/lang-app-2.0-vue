@@ -1,12 +1,32 @@
 @import 'colors.scss';
-@import 'variables.scss';
 @import 'mixins.scss';
 @import 'utils.scss';
 
-body {
-    background: $light;
+:root {
+    --layout-backround: #{$light};
+    --box-shadow-1: #{$gray-light-1};
+    --box-shadow-2: #{$gray};
+    --text-color: #{$black};
+    --table-row-bg: #{$white};
+    --header: #{$primary};
 }
+
+.dark-mode {
+    --layout-backround: #{$dark};
+    --box-shadow-1: #{$dark-3};
+    --box-shadow-2: #{$dark-3};
+    --text-color: #{$white};
+    --table-row-bg: #{$dark};
+    --header: #{$dark-blue};
+}
+
+body {
+    color: var(--text-color);
+}
+
+@import 'variables.scss';
 
 h1 {
     margin-top: 0;
+    color: var(--text-color);
 }
