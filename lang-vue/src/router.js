@@ -7,7 +7,30 @@ import Dictionary from './views/Dictionary.vue';
 import WordView from './views/WordView.vue';
 import AddWord from './components/AddWord/AddWord.vue';
 import Registration from './views/Registration.vue';
-import store from './store.js';
+import Logout from './components/Register/Logout.vue';
+
+
+const getCookie = (cname) => {
+  const name = `${cname}=`;
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return '';
+};
+
+const deleteCookie = (name) => {
+  if (getCookie(name)) {
+    document.cookie = `${name}=`
+  }
+}
 
 Vue.use(Router);
 const router = new Router({
@@ -20,15 +43,31 @@ const router = new Router({
       component: Registration,
       meta: {
         requiresAuth: false,
-      }
+      },
+    },
+    {
+      path: '/logout',
+      name: 'Logout',
+      component: Logout,
+      meta: {
+        requiresAuth: false,
+      },
+      beforeEnter: (to, from, next) => {
+        deleteCookie('token');
+        deleteCookie('userId');
+        next({
+          path: '/register',
+          params: { nextUrl: to.fullPath },
+        }); 
+      },
     },
     {
       path: '/',
       name: 'home',
       component: Home,
       meta: {
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
     {
       path: '/flashcards',
@@ -38,75 +77,59 @@ const router = new Router({
       // which is lazy-loaded when the route is visited.
       component: Flashcards,
       meta: {
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
     {
       path: '/hangman',
       name: 'hangman',
       component: Hangman,
       meta: {
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
     {
       path: '/dictionary',
       name: 'dictionary',
       component: Dictionary,
       meta: {
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
     {
       path: '/dictionary/add',
       name: 'adddWord',
       component: AddWord,
       meta: {
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
     {
       path: '/dictionary/:wordId',
       name: 'word',
       component: WordView,
       meta: {
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
   ],
 });
 
-const getCookie = (cname) => {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-       c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-       return c.substring(name.length, c.length);
-      }
-  }
-  return "";
-}
-
 router.beforeEach((to, from, next) => {
-  if(to.meta.requiresAuth) {
-    if(getCookie('token') == null) {
+  if (to.meta.requiresAuth) {
+    console.log(getCookie('token'));
+    if (getCookie('token') == '') {
+      alert('Log in first!')
       next({
         path: '/register',
-        params: { nextUrl: to.fullPath }
-      })
-    }
-    else {
+        params: { nextUrl: to.fullPath },
+      });
+    } else {
       next();
     }
-  }
-  else {
+  } else {
     next();
   }
-})
+});
 
 export default router;
