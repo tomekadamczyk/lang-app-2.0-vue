@@ -20,12 +20,14 @@ const getCookie = (cname) => {
 
 const userToken = getCookie('token');
 const userId = getCookie('userId');
+const isAuthenticated = userToken.length !== 0;
 
 export default new Vuex.Store({
   state: {
     defaultLanguage: 'czech',
     token: userToken || '',
     userId: userId || '',
+    isAuthenticated: isAuthenticated,
     dictionary: [],
     partsOfSpeech: [
       { value: 'noun' },
@@ -250,7 +252,7 @@ export default new Vuex.Store({
     GET_ACTIVE_USER_ID(state, id) {
       state.activeUserId = id;
     },
-    AUTHENTICATE_USER(state, value) {
+    AUTHENTICATE(state, value) {
       state.isAuthenticated = value;
     },
   },
@@ -258,5 +260,8 @@ export default new Vuex.Store({
     updateDictionary(context, payload) {
       context.commit('UPDATE_DICTIONARY', payload);
     },
+    authenticate(context, payload) {
+      context.commit('AUTHENTICATE', payload)
+    }
   },
 });
