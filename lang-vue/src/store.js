@@ -3,20 +3,20 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 const getCookie = (cname) => {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-       c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-       return c.substring(name.length, c.length);
-      }
+  const name = `${cname}=`;
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
   }
-  return "";
-}
+  return '';
+};
 
 const userToken = getCookie('token');
 const userId = getCookie('userId');
