@@ -3,10 +3,12 @@
         <Hamburger
             v-bind:activeHeader="isLayoutActive"
             v-on:toggle="toggleNavigation"
+            v-if="isAuthenticated"
         />
         <VHeader
             v-bind:activeHeader="isLayoutActive"
             v-on:closeNav="closeNav"
+            v-if="isAuthenticated"
         />
         <main
             class="layout"
@@ -32,6 +34,14 @@ export default {
       isLayoutActive: false,
     };
   },
+  computed: {
+    isAuthenticated() {
+      return this.$store.state.isAuthenticated;
+    }
+  },
+  created() {
+    console.log(this.isAuthenticated)
+  },
   methods: {
     toggleNavigation() {
       this.isLayoutActive = !this.isLayoutActive;
@@ -54,7 +64,7 @@ export default {
         width: 100%;
         height: auto;
         position: relative;
-        padding: 0 20px;
+        padding: 20px;
 
         @include media-screen(tablet-up) {
             width: calc(100% - 70px);
