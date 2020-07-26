@@ -5,7 +5,6 @@
           v-on:selectChange="selectChanges"
         />
         <FechedDictionary
-          class="table-dict"
           :languageVarId="languageVarId"
         />
     </div>
@@ -49,10 +48,5 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/scss/style.scss";
-
-.table-dict {
-  position: relative;
-  z-index: 0;
-}
 
 </style>
