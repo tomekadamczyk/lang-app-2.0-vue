@@ -37,7 +37,7 @@ export default {
     height: auto;
     text-align: center;
     position: fixed;
-    background: $primary;
+    background: var(--header);
     top: 0;
     left: 0;
     z-index: 9999;
@@ -54,11 +54,11 @@ export default {
       top: 0;
       height: 100vh;
       text-align: left;
-    transform: translateY(0);
+      transform: translateY(0);
 
       &.active {
         width: 250px;
-        box-shadow: 3px 5px 66px 4px $gray;
+        box-shadow: $header-box-shadow;
       }
     }
   }
