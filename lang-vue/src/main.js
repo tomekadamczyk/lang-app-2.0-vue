@@ -55,9 +55,13 @@ const apolloProvider = new VueApollo({
 
 Vue.config.productionTip = false;
 
+const userId = getCookie('userId');
 new Vue({
   router,
   store,
   apolloProvider,
+  data: {
+    userId,
+  },
   render: h => h(App),
 }).$mount('#app');
