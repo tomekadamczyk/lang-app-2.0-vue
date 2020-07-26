@@ -61,7 +61,7 @@ export default {
     .dropdown-box {
         min-width: 140px;
         display: inline-block;
-        box-shadow: 1px 1px 15px 1px #ddd;
+        box-shadow: $dropdown-box-shadow;
         border-radius: 10px;
         position: relative;
         z-index: 100;
@@ -103,7 +103,7 @@ export default {
         visibility: hidden;
         transform: translateY(30px);
         transition: opacity .3s, visibility .3s, transform .3s;
-        box-shadow: 1px 10px 15px 1px #ddd;
+        box-shadow: $dropdown-box-shadow;
         width: 100%;
         background: #fff;
         overflow: hidden;
