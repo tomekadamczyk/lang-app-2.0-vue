@@ -6,7 +6,7 @@
            - {{ wordFromDatabase.translation }}
         </h1>
         <div
-          class="tables"
+          class="word-tables"
           v-if="wordFromDatabase.PartofspeechId === 1"
         >
           <NounTable
@@ -18,7 +18,7 @@
           />
         </div>
         <div
-          class="tables"
+          class="word-tables"
           v-if="wordFromDatabase.PartofspeechId === 2"
         >
           <VerbTable
@@ -29,7 +29,7 @@
           />
         </div>
         <div
-          class="tables"
+          class="word-tables"
           v-if="wordFromDatabase.PartofspeechId === 3"
         >
           <AdjectiveTable
@@ -131,25 +131,39 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/scss/style.scss";
 
-  .tables {
+  .word-tables {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    @include media-screen(phone-wide-up) {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
 
     .table {
+      box-shadow: none;
+    }
+
+    .table-container {
       width: 100%;
-      margin-bottom: 40px;
+      margin-bottom: 2.5rem;
       display: inline-block;
       vertical-align: top;
-      border-radius: 10px;
-      padding: 10px 27px;
-      box-shadow: $box-shadow;
-
+      border-radius: $border-radius;
+      
       @include media-screen(phone-wide-up) {
-        margin-right: 40px;
         width: auto;
       }
+        
+      &:not(:last-child) {
+        @include media-screen(phone-wide-up) {
+          margin-right: 1rem;
+        }
 
-      @include media-screen(tablet-up) {
-        margin-right: 100px;
+        @include media-screen(tablet-up) {
+          margin-right: 6.25rem;
+        }
       }
     }
   }

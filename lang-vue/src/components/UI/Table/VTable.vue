@@ -1,4 +1,5 @@
 <template>
+  <div class="table-outer">
     <table class="table">
       <TableRow
         v-for="(item, index) in tableDataArray"
@@ -9,6 +10,7 @@
         v-bind:checkRouter="checkRouter"
       />
     </table>
+  </div>
 </template>
 
 <script>
@@ -39,22 +41,32 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/style.scss";
 
+  .table-outer {
+    border-radius: .625rem;
+    margin: 30px auto 0;
+    overflow: hidden;
+    box-shadow: $box-shadow;
+    width: 100%;
+
     .table {
         width: 100%;
-        margin: 30px auto 0;
         border-collapse: collapse;
         font-size: 13px;
 
         &__row {
-            border-bottom: 1px solid $gray-light-1;
             line-height: 2;
-            color: $gray;
+            color: var(--text-color);
             width: 100%;
             display: block;
+            padding: 0.3rem 0.635rem;
+            background: var(--table-row-bg);
 
             &:hover {
-                background: $gray-light-1;
-                color: $black;
+                background: $primary;
+            }
+
+            &:not(:last-of-type) {
+              border-bottom: 1px solid $gray-light-1;
             }
         }
 
@@ -62,5 +74,6 @@ export default {
             border: 1px solid $gray;
         }
     }
+  }
 
 </style>

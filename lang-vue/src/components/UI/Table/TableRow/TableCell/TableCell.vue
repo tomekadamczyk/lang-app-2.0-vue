@@ -37,11 +37,11 @@ export default {
 @import "../../../../../assets/scss/style.scss";
 
   .table__id {
-    width: 30px;
+    width: 1.875rem;
   }
 
   .table__content {
-    width: 120px;
+    width: 7.5rem;
     &:first-of-type {
       font-weight: bold;
     }

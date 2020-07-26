@@ -1,10 +1,9 @@
 <template>
-  <div class="table">
+  <div class="table-container">
       <h3 class="table__heading">{{time}}</h3>
       <VTable
           v-bind:tableDataArray="preparedData"
           v-bind:checkRouter="checkRouter"
-          class="table"
       />
   </div>
 </template>

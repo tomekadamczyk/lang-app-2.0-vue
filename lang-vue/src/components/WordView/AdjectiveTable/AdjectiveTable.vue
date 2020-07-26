@@ -2,7 +2,7 @@
     <VTable
         v-bind:tableDataArray="preparedData"
         v-bind:checkRouter="checkRouter"
-        class="table"
+        class="table-container"
     />
 </template>
 
