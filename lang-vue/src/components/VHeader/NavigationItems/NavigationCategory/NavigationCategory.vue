@@ -22,7 +22,7 @@ import NavigationItem from '../NavigationItem/NavigationItem.vue';
 import NAV_CATEGORIES from '../../../../data/navCategories';
 
 const {
-  general, excercises, test, favorites,
+  general, excercises, test, favorites, account
 } = NAV_CATEGORIES;
 
 export default {
@@ -56,13 +56,13 @@ export default {
           id: 3, name: 'Dictionary', placeholder: 'O', url: '/dictionary', category: excercises,
         },
         {
-          id: 4, name: 'test2', placeholder: 'O', url: '/hangman', category: test,
+          id: 4, name: 'Account', placeholder: 'O', url: '/account', category: account,
         },
         {
-          id: 5, name: 'fav', placeholder: 'O', url: '/hangman', category: favorites,
+          id: 5, name: 'Settings', placeholder: 'O', url: '/settings', category: account,
         },
         {
-          id: 6, name: 'fav2', placeholder: 'O', url: '/hangman', category: favorites,
+          id: 6, name: 'Logout', placeholder: 'O', url: '/logout', category: account,
         },
       ],
     };

@@ -18,7 +18,7 @@ import NavigationCategory from './NavigationCategory.vue';
 import NAV_CATEGORIES from '../../../../data/navCategories';
 
 const {
-  general, excercises, test, favorites,
+  general, excercises, test, favorites, account
 } = NAV_CATEGORIES;
 
 export default {
@@ -33,7 +33,7 @@ export default {
   },
   data() {
     return {
-      categories: [general, excercises, test, favorites],
+      categories: [general, excercises, test, favorites, account],
     };
   },
 };
