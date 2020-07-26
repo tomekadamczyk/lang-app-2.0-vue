@@ -3,6 +3,7 @@ const NAV_CATEGORIES = {
   excercises: 'excercises',
   test: 'test',
   favorites: 'favorites',
+  account: 'account',
 };
 
 export default NAV_CATEGORIES;
