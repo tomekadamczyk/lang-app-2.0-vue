@@ -135,14 +135,22 @@ export default {
     width: 100%;
 
     .table {
-      width: auto;
+      width: 100%;
+      margin-bottom: 40px;
       display: inline-block;
-      margin-right: 100px;
       vertical-align: top;
       border-radius: 10px;
       padding: 10px 27px;
       box-shadow: $box-shadow;
-      
+
+      @include media-screen(phone-wide-up) {
+        margin-right: 40px;
+        width: auto;
+      }
+
+      @include media-screen(tablet-up) {
+        margin-right: 100px;
+      }
     }
   }
 
