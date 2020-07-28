@@ -9,7 +9,7 @@
           id="part-of-speech"
           v-model="partofspeechId">
           <option
-            v-for="(partOfSpeech, index) in allPartsOfSpeech"
+            v-for="(partOfSpeech, index) in allPartOfSpeeches"
             v-bind:key="index"
             v-bind:value="partOfSpeech.id"
           >
@@ -53,7 +53,7 @@
               <div class="inputs-heading">L.p</div>
               <div class="inputs-set">
                 <InputGroup
-                  v-for="(value, index) in grammaticalCases"
+                  v-for="(value, index) in allGrammaticalCases"
                   v-bind:key="index"
                   v-bind:id="`new-word-translation`"
                   v-bind:model="nounCases.lp[value.value]"
@@ -65,7 +65,7 @@
               <div class="inputs-heading">L.m</div>
               <div class="inputs-set">
                 <InputGroup
-                  v-for="(value, index) in grammaticalCases"
+                  v-for="(value, index) in allGrammaticalCases"
                   v-bind:key="index"
                   v-bind:id="`new-word-translation`"
                   v-bind:model="nounCases.lm[value.value]"
@@ -79,7 +79,7 @@
               <div class="inputs-heading">Present</div>
               <div class="inputs-set">
                 <InputGroup
-                  v-for="(value, index) in allTimePersons"
+                  v-for="(value, index) in allTimePeople"
                   v-bind:key="index"
                   v-bind:id="`nominative`"
                   v-bind:model="verbPerson.present[value.value]"
@@ -91,7 +91,7 @@
               <div class="inputs-heading">Past</div>
               <div class="inputs-set">
                 <InputGroup
-                  v-for="(value, index) in allTimePersons"
+                  v-for="(value, index) in allTimePeople"
                   v-bind:key="index"
                   v-bind:id="`nominative`"
                   v-bind:model="verbPerson.past[value.value]"
@@ -103,7 +103,7 @@
               <div class="inputs-heading">Future</div>
               <div class="inputs-set">
                 <InputGroup
-                  v-for="(value, index) in allTimePersons"
+                  v-for="(value, index) in allTimePeople"
                   v-bind:key="index"
                   v-bind:id="`nominative`"
                   v-bind:model="verbPerson.future[value.value]"
@@ -116,16 +116,15 @@
           <div v-if="partofspeechId === 3" class="times">
             <div class="form-container-data">
               <div
-                v-for="(singleCase, index) in grammaticalCases"
+                v-for="(singleCase, index) in allGrammaticalCases"
                 v-bind:key="index"
-                class="grammaticalCases"
+                class="allGrammaticalCases"
               >
                 <div class="inputs-heading">{{ singleCase.value }}</div>
                 <div class="inputs-set inputs-set--adj">
                   <InputGroup
-                    v-for="(sexType, index) in allSexTypes"
+                    v-for="(sexType, index) in allSexes"
                     v-bind:key="index"
-                    v-bind:id="`nominative`"
                     v-bind:model="adj.lp[singleCase.value][sexType.value]"
                     v-on:input="adj.lp[singleCase.value][sexType.value] = $event"
                   >
@@ -136,16 +135,15 @@
             </div>
             <div class="form-container-data">
               <div
-                v-for="(singleCase, index) in grammaticalCases"
+                v-for="(singleCase, index) in allGrammaticalCases"
                 v-bind:key="index"
-                class="grammaticalCases"
+                class="allGrammaticalCases"
               >
                 <div class="inputs-heading">{{ singleCase.value }}</div>
                 <div class="inputs-set inputs-set--adj">
                   <InputGroup
-                    v-for="(sexType, index) in allSexTypes"
+                    v-for="(sexType, index) in allSexes"
                     v-bind:key="index"
-                    v-bind:id="`nominative`"
                     v-bind:model="adj.lm[singleCase.value][sexType.value]"
                     v-on:input="adj.lm[singleCase.value][sexType.value] = $event"
                   >
@@ -173,34 +171,34 @@ export default {
     VLabel,
   },
   apollo: {
-    allPartsOfSpeech: gql`
-      query allPartsOfSpeech {
-      allPartsOfSpeech {
+    allPartOfSpeeches: gql`
+      query getAllPartOfSpeeches {
+      allPartOfSpeeches {
         id,
         value
       }
     }`,
-    grammaticalCases: gql`
-      query getGrammaticalCases {
-      grammaticalCases {
+    allGrammaticalCases: gql`
+      query getAllGrammaticalCases {
+      allGrammaticalCases {
         value
       }
     }`,
-    allTimePersons: gql`
-      query allTimePersons {
-      allTimePersons {
+    allTimePeople: gql`
+      query getAllTimePeople {
+      allTimePeople {
         value
       }
     }`,
-    allSexTypes: gql`
-      query allSexTypes {
-      allSexTypes {
+    allSexes: gql`
+      query getAllSexes {
+      allSexes {
         value
       }
     }
     `,
     allLanguages: gql`
-      query allLanguages {
+      query getAllLanguages {
       allLanguages {
         id,
         value,
@@ -341,10 +339,10 @@ export default {
   },
   computed: {
     getCases() {
-      return this.grammaticalCases;
+      return this.allGrammaticalCases;
     },
     getSexTypes() {
-      return this.allSexTypes;
+      return this.allSexes;
     },
     getLanguages() {
       return this.allLanguages;
@@ -363,17 +361,14 @@ export default {
       }
       this.$apollo.mutate({
         mutation: gql`
-          mutation addWord ($value: String!, $translation: String!, $wordSpecific: JSON, $partofspeechId: Int!, $languageId: Int!) {
-            addWord (value: $value, translation: $translation, wordSpecific: $wordSpecific, partofspeechId: $partofspeechId, languageId: $languageId) {
+          mutation addWord ($value: String!, $translation: String!, $wordSpecific: JSON, $partofspeechId: Int!, $languageId: Int!, $UserId: Int!) {
+            addWord (value: $value, translation: $translation, wordSpecific: $wordSpecific, PartofspeechId: $partofspeechId, LanguageId: $languageId, UserId: $UserId) {
               value,
               translation,
               wordSpecific,
-              partofspeechId {
-                id
-              },
-              languageId {
-                id
-              }
+              PartofspeechId
+              LanguageId,
+              UserId
             }
           },
         `,
@@ -383,6 +378,7 @@ export default {
           wordSpecific: this.wordSpecific,
           partofspeechId: this.partofspeechId,
           languageId: this.languageId,
+          UserId: Number(this.$store.state.userId)
         },
       });
     },
