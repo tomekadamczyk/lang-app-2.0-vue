@@ -20,7 +20,7 @@ const getCookie = (cname) => {
 
 const userToken = getCookie('token');
 const userId = getCookie('userId');
-const isAuthenticated = userToken.length !== 0;
+const isAuthenticated = userToken.length !== 0 || false;
 
 export default new Vuex.Store({
   state: {

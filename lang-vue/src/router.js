@@ -55,10 +55,7 @@ const router = new Router({
       beforeEnter: (to, from, next) => {
         deleteCookie('token');
         deleteCookie('userId');
-        next({
-          path: '/register',
-          params: { nextUrl: to.fullPath },
-        }); 
+        next(); 
       },
     },
     {

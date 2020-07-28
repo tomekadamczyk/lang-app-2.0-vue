@@ -145,6 +145,7 @@ export default {
         const { token } = result.data.login;
         const { userId } = result.data.login;
         this.saveUserData(token, userId);
+        this.$store.state.isAuthenticated = true;
         this.$router.push({ path: '/' })
       });
     },
